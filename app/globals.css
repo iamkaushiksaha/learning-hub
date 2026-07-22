@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ---- House design tokens (web-experience-design/aesthetic-direction.md) ---- */
+:root,
+[data-theme="dark"] {
+  --bg: #0b0d11;
+  --surface-1: #14171d;
+  --surface-2: #1c2027;
+  --border: #262b34;
+  --border-strong: #39404c;
+  --text: #f2f4f8;
+  --text-2: #a6aebf;
+  --text-3: #7a8290;
+  --accent: #7c6bff;
+  --accent-2: #a78bfa;
+  --accent-soft: #1b1930;
+  --accent-contrast: #0b0d11;
+  --cat-teal: #5dcaa5;
+  --cat-teal-bg: #10312d;
+  --cat-coral: #f0997b;
+  --cat-coral-bg: #3a2114;
+  /* Code card — intentionally dark in BOTH themes (not overridden below) */
+  --code-bg: #0f1218;
+  --code-header: #171b24;
+  --code-border: #272d38;
+  --code-text: #e7eaf0;
+  --code-muted: #808a9c;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #fbfbfd;
+  --surface-1: #ffffff;
+  --surface-2: #f2f3f7;
+  --border: #e4e7ee;
+  --border-strong: #cdd2dd;
+  --text: #14171d;
+  --text-2: #4c5568;
+  --text-3: #667085;
+  --accent: #5b4be0;
+  --accent-2: #4536c4;
+  --accent-soft: #eef0fe;
+  --accent-contrast: #ffffff;
+  --cat-teal: #0f6e56;
+  --cat-teal-bg: #e1f5ee;
+  --cat-coral: #993c1d;
+  --cat-coral-bg: #faece7;
+  /* code-* tokens intentionally inherit the dark values from :root */
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-cat-teal: var(--cat-teal);
+  --color-cat-teal-bg: var(--cat-teal-bg);
+  --color-cat-coral: var(--cat-coral);
+  --color-cat-coral-bg: var(--cat-coral-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius: 10px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* ---- Diagram classes (theme-aware) ---- */
+.dg-box { fill: var(--surface-2); stroke: var(--border-strong); }
+.dg-accent { fill: var(--accent-soft); stroke: var(--accent); }
+.dg-teal { fill: var(--cat-teal-bg); stroke: var(--cat-teal); }
+.dg-coral { fill: var(--cat-coral-bg); stroke: var(--cat-coral); }
+.dg-title { fill: var(--text); font-size: 13.5px; font-weight: 500; }
+.dg-sub { fill: var(--text-3); font-size: 11.5px; }
+.dg-line { stroke: var(--text-3); stroke-width: 1.3; fill: none; }
+.dg-flow { stroke-dasharray: 6 6; animation: dgflow 1.2s linear infinite; }
+
+@keyframes dgflow {
+  to { stroke-dashoffset: -12; }
+}
+
+/* ---- Prose helpers ---- */
+.prose-w { max-width: 68ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
