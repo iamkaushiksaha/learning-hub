@@ -1,12 +1,7 @@
 import type { ReactNode } from "react";
+import { Badge } from "@/components/ui/badge";
 
-const styles: Record<string, string> = {
-  accent: "bg-accent-soft text-accent",
-  teal: "bg-cat-teal-bg text-cat-teal",
-  coral: "bg-cat-coral-bg text-cat-coral",
-  neutral: "bg-surface-2 text-text-2",
-};
-
+/** Thin alias over the shadcn-style Badge primitive, kept for topic-page ergonomics. */
 export function Chip({
   children,
   tone = "accent",
@@ -14,11 +9,5 @@ export function Chip({
   children: ReactNode;
   tone?: "accent" | "teal" | "coral" | "neutral";
 }) {
-  return (
-    <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[tone]}`}
-    >
-      {children}
-    </span>
-  );
+  return <Badge tone={tone}>{children}</Badge>;
 }
