@@ -18,7 +18,13 @@ export interface Topic {
   description: string;
   tags: string[];
   date: string;
-  accent?: "accent" | "teal" | "coral";
+  /** Optional multi-part series grouping. Topics with the same seriesId
+   *  are chapters, ordered by `part`, and get prev/next navigation. */
+  seriesId?: string;
+  seriesTitle?: string;
+  part?: number;
+  /** Optional companion example repo/folder path (relative to repo root). */
+  examples?: string;
 }
 
 export const CATEGORIES: Category[] = [
@@ -31,14 +37,30 @@ export const CATEGORIES: Category[] = [
 
 export const TOPICS: Topic[] = [
   {
-    title: "Detection-as-Code: CI/CD for Microsoft Sentinel",
+    title: "Detection-as-Code: the pipeline & governance",
     slug: "detection-as-code-cicd",
     category: "devops",
     description:
-      "The full pipeline from authoring a rule in the dev UI to automated prod deployment — repo strategy, CI vs CD, ARM vs Terraform, and the governance case.",
+      "How analytic rules move from an engineer's idea to a production Sentinel workspace — repo strategy, deploy engines (ARM vs Terraform), CI vs CD, IaC vs API, and the governance case.",
     tags: ["Sentinel", "GitHub Actions", "Azure DevOps", "Terraform", "ARM"],
     date: "2026-07-22",
-    accent: "accent",
+    seriesId: "detection-as-code",
+    seriesTitle: "Detection-as-Code for Sentinel",
+    part: 1,
+    examples: "examples/detection-as-code-cicd",
+  },
+  {
+    title: "Validating Sentinel detections in CI/CD",
+    slug: "validating-sentinel-detections",
+    category: "devops",
+    description:
+      "The three tiers of KQL validation — static lint, syntax/schema check, and functional 'does it fire' testing — mapped to SAST, compile, and DAST, and placed in the pipeline as a shift-left gate.",
+    tags: ["Sentinel", "KQL", "CI/CD", "SAST", "testing"],
+    date: "2026-07-23",
+    seriesId: "detection-as-code",
+    seriesTitle: "Detection-as-Code for Sentinel",
+    part: 2,
+    examples: "examples/detection-as-code-cicd",
   },
 ];
 
@@ -48,4 +70,18 @@ export function topicsByCategory(id: CategoryId): Topic[] {
 
 export function getTopic(slug: string): Topic | undefined {
   return TOPICS.find((t) => t.slug === slug);
+}
+
+/** Ordered chapters of a series. */
+export function seriesTopics(seriesId: string): Topic[] {
+  return TOPICS.filter((t) => t.seriesId === seriesId).sort(
+    (a, b) => (a.part ?? 0) - (b.part ?? 0),
+  );
+}
+
+export function seriesNeighbors(topic: Topic): { prev?: Topic; next?: Topic } {
+  if (!topic.seriesId) return {};
+  const chapters = seriesTopics(topic.seriesId);
+  const i = chapters.findIndex((t) => t.slug === topic.slug);
+  return { prev: chapters[i - 1], next: chapters[i + 1] };
 }

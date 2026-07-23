@@ -1,0 +1,98 @@
+# Sample GitHub Actions pipeline for Sentinel Detection-as-Code.
+# Copy into .github/workflows/ of your OWN detections repo (not this site repo).
+#
+# CI (validate) runs on every pull request — the static gate that must pass
+# before merge. CD (deploy) runs after merge: to dev on `develop`, to prod on
+# `main` with a manual approval gate. Auth uses OIDC federation (no stored
+# secrets); grant the federated identity Sentinel Contributor on each RG.
+
+name: sentinel-detections
+
+on:
+  pull_request:
+    branches: [develop, main]
+    paths: ["rules/**", "terraform/**", "scripts/**"]
+  push:
+    branches: [develop, main]
+    paths: ["rules/**", "terraform/**"]
+
+permissions:
+  id-token: write   # for azure/login OIDC
+  contents: read
+
+jobs:
+  # ---- CI: static validation (the "SAST" gate) — runs on PRs ----
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Static metadata lint (no Azure needed)
+        run: |
+          python3 scripts/lint_rule.py rules/*.json
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: KQL syntax + schema check (read-only)
+        run: |
+          for f in rules/*.json; do
+            ./scripts/kql_check.sh "${{ vars.DEV_WORKSPACE_GUID }}" "$f"
+          done
+
+      - name: ARM template pre-flight (would it deploy?)
+        run: |
+          for f in rules/*.json; do
+            az deployment group validate \
+              --resource-group ${{ vars.DEV_RESOURCE_GROUP }} \
+              --template-file "$f" \
+              --parameters workspace=${{ vars.DEV_WORKSPACE_NAME }}
+          done
+
+  # ---- CD: deploy to dev (the "DAST" stage runs the functional test) ----
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy rules to dev workspace
+        run: |
+          for f in rules/*.json; do
+            az deployment group create \
+              --resource-group ${{ vars.DEV_RESOURCE_GROUP }} \
+              --template-file "$f" \
+              --parameters workspace=${{ vars.DEV_WORKSPACE_NAME }}
+          done
+      # - name: Functional test (does it fire on seeded samples?)
+      #   run: ./scripts/run_functional_tests.sh   # see tests/functional_test.md
+
+  # ---- CD: deploy to prod — gated by a manual approval on the environment ----
+  deploy-prod:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: prod          # add required reviewers here = the CAB gate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy rules to prod workspace
+        run: |
+          for f in rules/*.json; do
+            az deployment group create \
+              --resource-group ${{ vars.PROD_RESOURCE_GROUP }} \
+              --template-file "$f" \
+              --parameters workspace=${{ vars.PROD_WORKSPACE_NAME }}
+          done

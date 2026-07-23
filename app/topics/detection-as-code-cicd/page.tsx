@@ -10,6 +10,7 @@ import { Accordion } from "@/components/content/accordion";
 import { Toc } from "@/components/content/toc";
 import { Figure } from "@/components/content/figure";
 import { PipelineDiagram, IacDiagram } from "@/components/content/diagrams";
+import { SeriesBadge, SeriesNav, ExamplesCallout } from "@/components/content/series";
 import { H2, P, Lead, UL, Code, Table, TH, TD } from "@/components/content/prose";
 
 const topic = getTopic("detection-as-code-cicd")!;
@@ -46,6 +47,7 @@ export default function Page() {
         <h1 className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-text sm:text-4xl">
           {topic.title}
         </h1>
+        <SeriesBadge topic={topic} />
         <div className="mt-3.5 flex flex-wrap gap-2">
           <Chip tone="accent">Sentinel</Chip>
           <Chip tone="teal">GitHub Actions</Chip>
@@ -245,7 +247,11 @@ git push -u origin feature/new-rule    # publish your branch to the remote
           is the source of truth.
         </Callout>
 
-        <div className="mt-14">
+        <ExamplesCallout path={topic.examples!} />
+
+        <SeriesNav topic={topic} />
+
+        <div className="mt-10">
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-2"
