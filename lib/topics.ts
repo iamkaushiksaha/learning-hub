@@ -1,4 +1,5 @@
 export type CategoryId =
+  | "git"
   | "devops"
   | "detection"
   | "hunting"
@@ -28,6 +29,7 @@ export interface Topic {
 }
 
 export const CATEGORIES: Category[] = [
+  { id: "git", name: "Git & collaboration", blurb: "Version control, branching, worktrees, team workflows" },
   { id: "devops", name: "DevOps & automation", blurb: "CI/CD, detection-as-code, IaC, pipelines" },
   { id: "detection", name: "Detection engineering", blurb: "Analytic rules, use cases, tuning, MITRE mapping" },
   { id: "hunting", name: "Threat hunting & KQL", blurb: "Hunt notes, KQL patterns, table deep-dives" },
@@ -36,6 +38,32 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const TOPICS: Topic[] = [
+  {
+    title: "Git collaboration: branches, forks & conflicts",
+    slug: "git-collaboration",
+    category: "git",
+    description:
+      "How multiple people work on one repo without colliding — the contribution flow, shared-repo vs fork model, why one branch per task, and exactly what happens when two people push to the same branch.",
+    tags: ["Git", "GitHub", "pull requests", "merge conflicts", "collaboration"],
+    date: "2026-07-24",
+    seriesId: "working-with-git",
+    seriesTitle: "Working with Git",
+    part: 1,
+    examples: "examples/git-collaboration",
+  },
+  {
+    title: "Git worktrees: many branches at once",
+    slug: "git-worktrees",
+    category: "git",
+    description:
+      "The working tree explained, then git worktree — one repository with several branches checked out in parallel folders. When you need it (hotfix mid-feature, PR review, parallel builds) and how it works.",
+    tags: ["Git", "worktree", "branching", "workflow"],
+    date: "2026-07-24",
+    seriesId: "working-with-git",
+    seriesTitle: "Working with Git",
+    part: 2,
+    examples: "examples/git-collaboration",
+  },
   {
     title: "Detection-as-Code: the pipeline & governance",
     slug: "detection-as-code-cicd",
