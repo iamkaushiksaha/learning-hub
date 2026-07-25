@@ -19,6 +19,9 @@
   --cat-teal-bg: #0d3029;
   --cat-coral: #f28d72;
   --cat-coral-bg: #392019;
+  --atlas-cyan: #63d3e4;
+  --atlas-amber: #f2b84b;
+  --atlas-mint: #7be0b0;
   --grid-line: rgba(155, 124, 255, 0.065);
   --hero-glow: rgba(115, 76, 255, 0.16);
   /* Code and diagram panels stay dark in both themes. */
@@ -48,6 +51,9 @@
   --cat-teal-bg: #def5ec;
   --cat-coral: #a64226;
   --cat-coral-bg: #fae9e3;
+  --atlas-cyan: #087f91;
+  --atlas-amber: #9b6200;
+  --atlas-mint: #137653;
   --grid-line: rgba(80, 53, 195, 0.07);
   --hero-glow: rgba(101, 72, 223, 0.1);
   --shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
@@ -232,6 +238,10 @@ body {
   stroke: var(--cat-coral);
 }
 
+.topic-preview-node-hot {
+  stroke: var(--atlas-amber);
+}
+
 .group:hover .topic-preview-path,
 .group:focus-within .topic-preview-path {
   animation-play-state: running;
@@ -257,6 +267,69 @@ body {
 
 /* ---- Prose helpers ---- */
 .prose-w { max-width: 68ch; }
+
+/* ---- AI → Agent field map ---- */
+.agent-map-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--atlas-cyan) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--atlas-cyan) 7%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.agent-signal-line {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--atlas-cyan) 0 7px,
+    transparent 7px 15px
+  );
+  animation: agent-signal-flow 1.8s linear infinite;
+}
+
+.agent-signal-spine {
+  background: repeating-linear-gradient(
+    180deg,
+    var(--atlas-cyan) 0 7px,
+    transparent 7px 15px
+  );
+  animation: agent-signal-flow-y 1.8s linear infinite;
+}
+
+.agent-pulse {
+  box-shadow:
+    0 0 0 7px color-mix(in srgb, var(--atlas-cyan) 8%, transparent),
+    0 0 28px color-mix(in srgb, var(--atlas-cyan) 36%, transparent);
+}
+
+.agent-pulse-amber {
+  box-shadow:
+    0 0 0 7px color-mix(in srgb, var(--atlas-amber) 8%, transparent),
+    0 0 28px color-mix(in srgb, var(--atlas-amber) 32%, transparent);
+}
+
+.agent-flow-rail {
+  background: repeating-linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--atlas-cyan) 72%, var(--border)) 0 7px,
+    transparent 7px 14px
+  );
+  animation: agent-signal-flow-y 1.5s linear infinite;
+}
+
+.agent-flow-rail-amber {
+  background: repeating-linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--atlas-amber) 76%, var(--border)) 0 7px,
+    transparent 7px 14px
+  );
+}
+
+@keyframes agent-signal-flow {
+  to { background-position: 30px 0; }
+}
+
+@keyframes agent-signal-flow-y {
+  to { background-position: 0 30px; }
+}
 
 @media (max-width: 640px) {
   .atlas-node {
