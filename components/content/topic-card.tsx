@@ -69,7 +69,12 @@ export function TopicCard({ topic }: { topic: Topic }) {
 
 function TopicPreview({ topic }: { topic: Topic }) {
   const isGit = topic.category === "git";
-  const accent = isGit ? "var(--cat-teal)" : "var(--accent)";
+  const isAi = topic.category === "ai";
+  const accent = isGit
+    ? "var(--cat-teal)"
+    : isAi
+      ? "var(--atlas-cyan)"
+      : "var(--accent)";
   const alert = topic.visualType === "decision-tree" ? "var(--cat-coral)" : accent;
 
   return (
@@ -97,7 +102,44 @@ function TopicPreview({ topic }: { topic: Topic }) {
           </marker>
         </defs>
         <rect width="640" height="340" fill={`url(#preview-${topic.slug})`} />
-        {topic.visualType === "sequence" && (
+        {isAi && (
+          <>
+            <path
+              d="M84 170 H556"
+              className="topic-preview-path"
+              markerEnd={`url(#arrow-${topic.slug})`}
+            />
+            {[
+              ["ML", 90, 154],
+              ["NN", 194, 154],
+              ["LLM", 298, 142],
+              ["AGENT", 414, 142],
+              ["RAG", 530, 154],
+            ].map(([label, x, y], index) => (
+              <g key={label}>
+                <circle
+                  cx={x}
+                  cy={170}
+                  r={index === 2 || index === 3 ? 31 : 22}
+                  className={index === 3 ? "topic-preview-node topic-preview-node-hot" : "topic-preview-node"}
+                />
+                <text
+                  x={x}
+                  y={y}
+                  dy={index === 2 || index === 3 ? 34 : 23}
+                  textAnchor="middle"
+                  className="topic-preview-label"
+                >
+                  {label}
+                </text>
+              </g>
+            ))}
+            <text x="320" y="250" textAnchor="middle" className="topic-preview-sub">
+              LEARN → REASON → ACT → RETRIEVE
+            </text>
+          </>
+        )}
+        {!isAi && topic.visualType === "sequence" && (
           <>
             {[80, 240, 400].map((x, i) => (
               <g key={x}>
@@ -114,7 +156,7 @@ function TopicPreview({ topic }: { topic: Topic }) {
             <path d="M354 166 H394" className="topic-preview-path" markerEnd={`url(#arrow-${topic.slug})`} />
           </>
         )}
-        {topic.visualType === "architecture" && (
+        {!isAi && topic.visualType === "architecture" && (
           <>
             <rect x="235" y="72" width="170" height="58" rx="8" className="topic-preview-node" />
             <text x="320" y="98" textAnchor="middle" className="topic-preview-label">
@@ -141,7 +183,7 @@ function TopicPreview({ topic }: { topic: Topic }) {
             ))}
           </>
         )}
-        {topic.visualType === "decision-tree" && (
+        {!isAi && topic.visualType === "decision-tree" && (
           <>
             <path d="M320 92 V142 L175 220" className="topic-preview-path" />
             <path d="M320 142 L465 220" className="topic-preview-path topic-preview-path-alert" />
