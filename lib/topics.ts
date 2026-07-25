@@ -6,6 +6,15 @@ export type CategoryId =
   | "architecture"
   | "delivery";
 
+export type TopicDifficulty = "foundation" | "intermediate" | "advanced";
+export type TopicVisualType =
+  | "architecture"
+  | "sequence"
+  | "decision-tree"
+  | "comparison"
+  | "state-machine"
+  | "lab";
+
 export interface Category {
   id: CategoryId;
   name: string;
@@ -17,8 +26,18 @@ export interface Topic {
   slug: string;
   category: CategoryId;
   description: string;
+  /** The concrete thing a reader should understand after completing the topic. */
+  outcome: string;
   tags: string[];
+  concepts: string[];
+  prerequisites: string[];
+  related: string[];
   date: string;
+  verifiedAt: string;
+  difficulty: TopicDifficulty;
+  readingMinutes: number;
+  visualType: TopicVisualType;
+  featured?: boolean;
   /** Optional multi-part series grouping. Topics with the same seriesId
    *  are chapters, ordered by `part`, and get prev/next navigation. */
   seriesId?: string;
@@ -44,8 +63,18 @@ export const TOPICS: Topic[] = [
     category: "git",
     description:
       "How multiple people work on one repo without colliding — the contribution flow, shared-repo vs fork model, why one branch per task, and exactly what happens when two people push to the same branch.",
+    outcome:
+      "Trace a contribution from local branch to merge and predict exactly when Git rejects, merges, or raises a conflict.",
     tags: ["Git", "GitHub", "pull requests", "merge conflicts", "collaboration"],
+    concepts: ["branch isolation", "fork model", "non-fast-forward", "merge conflict"],
+    prerequisites: ["basic terminal use"],
+    related: ["git-worktrees"],
     date: "2026-07-24",
+    verifiedAt: "2026-07-24",
+    difficulty: "foundation",
+    readingMinutes: 9,
+    visualType: "sequence",
+    featured: true,
     seriesId: "working-with-git",
     seriesTitle: "Working with Git",
     part: 1,
@@ -57,8 +86,17 @@ export const TOPICS: Topic[] = [
     category: "git",
     description:
       "The working tree explained, then git worktree — one repository with several branches checked out in parallel folders. When you need it (hotfix mid-feature, PR review, parallel builds) and how it works.",
+    outcome:
+      "Choose when a worktree is safer than switching or stashing, then create and remove one without duplicating repository history.",
     tags: ["Git", "worktree", "branching", "workflow"],
+    concepts: ["working tree", "shared object store", "parallel branches", "branch isolation"],
+    prerequisites: ["branches", "commits"],
+    related: ["git-collaboration"],
     date: "2026-07-24",
+    verifiedAt: "2026-07-24",
+    difficulty: "foundation",
+    readingMinutes: 8,
+    visualType: "architecture",
     seriesId: "working-with-git",
     seriesTitle: "Working with Git",
     part: 2,
@@ -70,8 +108,18 @@ export const TOPICS: Topic[] = [
     category: "devops",
     description:
       "How analytic rules move from an engineer's idea to a production Sentinel workspace — repo strategy, deploy engines (ARM vs Terraform), CI vs CD, IaC vs API, and the governance case.",
+    outcome:
+      "Design a governed path that promotes an analytic rule from authoring through review, validation, development, and production.",
     tags: ["Sentinel", "GitHub Actions", "Azure DevOps", "Terraform", "ARM"],
+    concepts: ["promotion pipeline", "policy gate", "infrastructure as code", "deployment boundary"],
+    prerequisites: ["analytic rules", "pull requests"],
+    related: ["validating-sentinel-detections", "git-collaboration"],
     date: "2026-07-22",
+    verifiedAt: "2026-07-23",
+    difficulty: "intermediate",
+    readingMinutes: 14,
+    visualType: "architecture",
+    featured: true,
     seriesId: "detection-as-code",
     seriesTitle: "Detection-as-Code for Sentinel",
     part: 1,
@@ -83,8 +131,18 @@ export const TOPICS: Topic[] = [
     category: "devops",
     description:
       "The three tiers of KQL validation — static lint, syntax/schema check, and functional 'does it fire' testing — mapped to SAST, compile, and DAST, and placed in the pipeline as a shift-left gate.",
+    outcome:
+      "Place each validation tier at the right pipeline gate and explain what failure it can and cannot catch.",
     tags: ["Sentinel", "KQL", "CI/CD", "SAST", "testing"],
+    concepts: ["static validation", "schema validation", "functional test", "shift left"],
+    prerequisites: ["KQL basics", "CI/CD stages"],
+    related: ["detection-as-code-cicd"],
     date: "2026-07-23",
+    verifiedAt: "2026-07-23",
+    difficulty: "intermediate",
+    readingMinutes: 12,
+    visualType: "decision-tree",
+    featured: true,
     seriesId: "detection-as-code",
     seriesTitle: "Detection-as-Code for Sentinel",
     part: 2,
