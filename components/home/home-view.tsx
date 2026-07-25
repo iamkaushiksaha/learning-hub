@@ -63,17 +63,23 @@ export function HomeView() {
             </motion.p>
             <motion.h1
               variants={reduce ? undefined : fadeUp}
-              className="text-[clamp(3.1rem,7vw,6.8rem)] font-semibold leading-[0.91] tracking-[-0.055em] text-text"
+              className="text-[clamp(4rem,6.2vw,5.8rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-text"
             >
-              Learning Atlas.
+              Learning
               <br />
-              <span className="text-text-2">See the system.</span>
-              <br />
-              Run the example.
+              Atlas.
             </motion.h1>
             <motion.p
               variants={reduce ? undefined : fadeUp}
-              className="mt-7 max-w-lg text-base leading-relaxed text-text-2 sm:text-lg"
+              className="mt-6 max-w-xl text-xl font-medium leading-snug tracking-tight text-text sm:text-2xl"
+            >
+              See the system.{" "}
+              <span className="text-text-2">Understand the decision.</span> Run
+              the example.
+            </motion.p>
+            <motion.p
+              variants={reduce ? undefined : fadeUp}
+              className="mt-4 max-w-lg text-base leading-relaxed text-text-2"
             >
               Understand the decision behind security, delivery, Git, and architecture—each topic connected to evidence, code, and a runnable path.
             </motion.p>
