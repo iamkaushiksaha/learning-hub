@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Security Research Hub",
-    template: "%s · Security Research Hub",
+    default: "Kaushik's Learning Atlas",
+    template: "%s · Learning Atlas",
   },
   description:
-    "Kaushik Saha's learning and research hub — Microsoft Sentinel, detection engineering, DevOps automation, threat hunting, and security architecture.",
+    "Visual research, architectures, and runnable labs across security, delivery, Git, DevOps, and system design.",
 };
 
 export default function RootLayout({
