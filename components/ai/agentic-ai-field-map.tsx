@@ -9,6 +9,7 @@ import {
 import {
   ArrowDown,
   ArrowLeft,
+  ArrowRight,
   BrainCircuit,
   Braces,
   Database,
@@ -16,9 +17,12 @@ import {
   Goal,
   Hand,
   MemoryStick,
+  MessageSquareText,
+  MousePointerClick,
   Network,
   Search,
   Sparkles,
+  Users,
   Workflow,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -33,6 +37,12 @@ const eras = [
     title: "Artificial Intelligence",
     description:
       'Humans hand-write every rule: “if X, then Y.” Useful in a narrow lane, but brittle when the unexpected arrives.',
+    example:
+      "A chess program follows rules written by experts: if the board looks like this, choose one of these moves.",
+    limitation:
+      "It cannot learn a new pattern unless a human adds another rule.",
+    unlocks:
+      "Machine learning replaces thousands of hand-written rules with patterns learned from examples.",
   },
   {
     year: "1980s–90s",
@@ -40,6 +50,12 @@ const eras = [
     title: "Machine Learning",
     description:
       "Feed the machine data plus answers and it learns the rules itself instead of relying on a complete human-authored rulebook.",
+    example:
+      "A spam filter learns from messages labelled “spam” and “not spam,” then predicts the label for a new email.",
+    limitation:
+      "People still decide which useful features to give the model, and it needs good training data.",
+    unlocks:
+      "Deep learning learns useful features automatically from much larger datasets.",
   },
   {
     year: "2012+",
@@ -47,6 +63,12 @@ const eras = [
     title: "Deep Learning",
     description:
       "Many-layered neural networks learn useful features directly from raw data and make perception tasks practical at scale.",
+    example:
+      "An image model learns edges, shapes, and faces directly from pixels instead of receiving a human-written checklist.",
+    limitation:
+      "Training needs large datasets, significant computing power, and careful evaluation.",
+    unlocks:
+      "Transformers make it practical to learn relationships across long sequences such as language.",
   },
   {
     year: "2017",
@@ -54,6 +76,12 @@ const eras = [
     title: "Transformer architecture",
     description:
       "Attention lets a model weigh every token against the others, unlocking parallel training and the modern language-model era.",
+    example:
+      "In “the bank beside the river,” attention helps the model connect “bank” with “river” and choose the correct meaning.",
+    limitation:
+      "A transformer is an architecture—not automatically a chatbot, an agent, or a source of reliable facts.",
+    unlocks:
+      "Training transformers on enormous text collections produces general-purpose language models.",
   },
   {
     year: "2020+",
@@ -61,6 +89,12 @@ const eras = [
     title: "LLMs & Generative AI",
     description:
       "Next-token prediction at scale becomes an engine for writing, coding, synthesis, and increasingly capable reasoning.",
+    example:
+      "A language model can explain a policy, draft code, or summarize a document from the prompt and context it receives.",
+    limitation:
+      "On its own it has no hands, no durable goal, and no guaranteed access to current or private information.",
+    unlocks:
+      "Tools, memory, instructions, and a reasoning loop turn the model into an agentic system.",
   },
   {
     year: "NOW",
@@ -68,6 +102,12 @@ const eras = [
     title: "Agentic AI",
     description:
       "The model gains goals, tools, memory, and a loop that lets it plan, act, observe, and continue until the goal is met.",
+    example:
+      "A support agent can read a ticket, search the knowledge base, draft a reply, verify policy, and ask for approval.",
+    limitation:
+      "Autonomy adds risk: every action needs permissions, boundaries, observability, and a clear stopping condition.",
+    unlocks:
+      "When one task cleanly separates into specialist roles, an orchestrator can coordinate several agents.",
   },
 ];
 
@@ -221,8 +261,103 @@ function FlowLane({
   );
 }
 
+function AgentScaleDiagram({ reduce }: { reduce: boolean | null }) {
+  const levels = [
+    {
+      label: "01 · model",
+      title: "LLM",
+      icon: MessageSquareText,
+      summary: "Answers one prompt",
+      details: ["Receives context", "Generates text", "Stops after the response"],
+      example: "“Draft a reply to this ticket.”",
+    },
+    {
+      label: "02 · system",
+      title: "Single agent",
+      icon: Workflow,
+      summary: "Owns one goal",
+      details: ["Plans next steps", "Uses tools + memory", "Observes and repeats"],
+      example: "Resolve this ticket within policy.",
+    },
+    {
+      label: "03 · team",
+      title: "Multi-agent system",
+      icon: Users,
+      summary: "Divides a larger goal",
+      details: ["Orchestrator routes work", "Specialists exchange results", "Coordination adds overhead"],
+      example: "Research, implement, and review a solution.",
+    },
+  ];
+
+  return (
+    <figure className="mt-10">
+      <div className="mb-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[var(--atlas-cyan)]">
+            Difference at a glance
+          </p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-text">
+            Same reasoning core. More system around it.
+          </h3>
+        </div>
+        <p className="max-w-sm text-sm leading-relaxed text-text-3">
+          Move from left to right as the task needs more autonomy—not because
+          “more agents” is automatically better.
+        </p>
+      </div>
+      <div className="relative grid gap-4 lg:grid-cols-3">
+        <div className="agent-signal-line absolute left-[12%] right-[12%] top-[57px] hidden h-px lg:block" aria-hidden="true" />
+        {levels.map(({ label, title, icon: Icon, summary, details, example }, index) => (
+          <motion.div
+            key={title}
+            whileHover={reduce ? undefined : { y: -4 }}
+            className={`relative z-10 rounded-xl border bg-bg p-5 ${
+              index === 1
+                ? "border-[var(--atlas-cyan)]/75"
+                : index === 2
+                  ? "border-[var(--atlas-amber)]/65"
+                  : "border-border-strong"
+            }`}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <span className={`font-mono text-[9px] uppercase tracking-[0.16em] ${
+                index === 2 ? "text-[var(--atlas-amber)]" : "text-[var(--atlas-cyan)]"
+              }`}>
+                {label}
+              </span>
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-border bg-surface-1">
+                <Icon size={17} className="text-text-2" aria-hidden="true" />
+              </span>
+            </div>
+            <h4 className="mt-5 text-2xl font-semibold tracking-tight text-text">{title}</h4>
+            <p className="mt-1 text-sm font-medium text-text-2">{summary}</p>
+            <ul className="mt-5 space-y-2 border-t border-border pt-4">
+              {details.map((detail) => (
+                <li key={detail} className="flex gap-2 text-sm leading-relaxed text-text-3">
+                  <span className={index === 2 ? "text-[var(--atlas-amber)]" : "text-[var(--atlas-cyan)]"}>→</span>
+                  {detail}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 rounded-lg bg-surface-1 px-3.5 py-3 text-xs leading-relaxed text-text-2">
+              <span className="mr-2 font-mono text-[9px] uppercase tracking-[0.12em] text-text-3">
+                Example
+              </span>
+              {example}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <figcaption className="mt-4 text-sm leading-relaxed text-text-3">
+        An LLM is a component. An agent is a system built around that component.
+        A multi-agent system coordinates several such systems.
+      </figcaption>
+    </figure>
+  );
+}
+
 export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
-  const [activeEra, setActiveEra] = useState(5);
+  const [activeEra, setActiveEra] = useState(0);
   const reduce = useReducedMotion();
 
   return (
@@ -364,33 +499,70 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
             copy="Agentic AI is not a separate universe. It is the current layer in a stack that begins with rules and compounds through learned representations, attention, and generative models."
           />
           <div className="mt-12">
-            <div className="relative grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
-              <div className="agent-signal-line absolute left-[8%] right-[8%] top-7 hidden h-px lg:block" aria-hidden="true" />
+            <div className="mb-5 flex flex-col justify-between gap-3 border-y border-border py-4 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--atlas-cyan)]/60 bg-[color-mix(in_srgb,var(--atlas-cyan)_7%,transparent)]">
+                  <MousePointerClick size={16} className="text-[var(--atlas-cyan)]" aria-hidden="true" />
+                </span>
+                <span>
+                  <strong className="block text-sm font-medium text-text">
+                    Choose an era to explore
+                  </strong>
+                  <span className="block text-xs text-text-3">
+                    Click or tap any step. Swipe the row on mobile; the explanation below will update.
+                  </span>
+                </span>
+              </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-3">
+                Step {activeEra + 1} of {eras.length}
+              </span>
+            </div>
+            <div className="relative grid snap-x grid-flow-col auto-cols-[82%] gap-3 overflow-x-auto pb-3 sm:grid-flow-row sm:auto-cols-auto sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
               {eras.map((era, index) => (
                 <button
                   key={era.year}
                   type="button"
                   onClick={() => setActiveEra(index)}
                   aria-pressed={activeEra === index}
-                  className="relative z-10 rounded-lg border border-border bg-bg px-3 py-4 text-left transition-all hover:border-[var(--atlas-cyan)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--atlas-cyan)]"
+                  aria-controls="era-explanation"
+                  className={`group relative z-10 min-h-[132px] snap-start rounded-xl border bg-bg p-5 text-left transition-all hover:-translate-y-0.5 hover:border-[var(--atlas-cyan)]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--atlas-cyan)] ${
+                    activeEra === index
+                      ? "border-[var(--atlas-cyan)] shadow-[inset_0_0_0_1px_var(--atlas-cyan)]"
+                      : "border-border"
+                  }`}
                 >
-                  <span
-                    className={`mb-4 grid h-6 w-6 place-items-center rounded-full border font-mono text-[8px] ${
-                      activeEra === index
-                        ? "agent-pulse border-[var(--atlas-cyan)] bg-[var(--atlas-cyan)] text-[#071116]"
-                        : "border-border-strong bg-surface-1 text-text-3"
-                    }`}
-                  >
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="flex items-start justify-between gap-4">
+                    <span
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border font-mono text-[9px] ${
+                        activeEra === index
+                          ? "agent-pulse border-[var(--atlas-cyan)] bg-[var(--atlas-cyan)] text-[#071116]"
+                          : "border-border-strong bg-surface-1 text-text-3"
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <ArrowRight
+                      size={15}
+                      className={`mt-1 transition-transform group-hover:translate-x-1 ${
+                        activeEra === index ? "text-[var(--atlas-cyan)]" : "text-text-3"
+                      }`}
+                      aria-hidden="true"
+                    />
                   </span>
-                  <span className="block font-mono text-[9px] uppercase tracking-[0.13em] text-[var(--atlas-cyan)]">
-                    {era.year}
+                  <span className="mt-5 block font-mono text-[10px] uppercase tracking-[0.13em] text-[var(--atlas-cyan)]">
+                    {era.year} · {era.short}
                   </span>
-                  <span className="mt-1 block text-sm font-medium text-text">{era.short}</span>
+                  <span className="mt-1.5 block text-base font-medium leading-snug text-text">
+                    {era.title}
+                  </span>
                 </button>
               ))}
             </div>
-            <div className="mt-5 min-h-[150px] border-y border-border py-6">
+            <div
+              id="era-explanation"
+              className="mt-6 min-h-[350px] rounded-2xl border border-border bg-surface-1/45 p-6 sm:p-8"
+              aria-live="polite"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeEra}
@@ -398,18 +570,44 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
                   animate={reduce ? undefined : { opacity: 1, y: 0 }}
                   exit={reduce ? undefined : { opacity: 0, y: -6 }}
                   transition={{ duration: 0.22 }}
-                  className="grid gap-4 sm:grid-cols-[150px_1fr]"
+                  className="grid gap-7 lg:grid-cols-[180px_1fr]"
                 >
-                  <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
-                    {eras[activeEra].year}
-                  </p>
                   <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-text">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--atlas-cyan)]">
+                      Era {String(activeEra + 1).padStart(2, "0")} · {eras[activeEra].year}
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-text-3">
+                      What changed at this step—and why the next step became necessary.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold tracking-tight text-text sm:text-3xl">
                       {eras[activeEra].title}
                     </h3>
-                    <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-text-2">
+                    <p className="mt-3 max-w-3xl text-base leading-relaxed text-text-2 sm:text-lg">
                       {eras[activeEra].description}
                     </p>
+                    <div className="mt-7 grid gap-5 border-t border-border pt-6 sm:grid-cols-2">
+                      {[
+                        ["Simple example", eras[activeEra].example],
+                        ["Main limitation", eras[activeEra].limitation],
+                        ["What it unlocked", eras[activeEra].unlocks],
+                      ].map(([label, value], index) => (
+                        <div
+                          key={label}
+                          className={index === 2 ? "sm:col-span-2" : ""}
+                        >
+                          <p className={`font-mono text-[9px] uppercase tracking-[0.15em] ${
+                            label === "Main limitation"
+                              ? "text-[var(--atlas-amber)]"
+                              : "text-[var(--atlas-cyan)]"
+                          }`}>
+                            {label}
+                          </p>
+                          <p className="mt-1.5 text-sm leading-relaxed text-text-2">{value}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -431,6 +629,13 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
             title="What contains what—and what acts."
             copy="The terms become easier when you separate the nested technology stack from the behaviour a system exhibits."
           />
+          <div className="mt-8 border-l-2 border-[var(--atlas-mint)] py-2 pl-5">
+            <p className="text-sm leading-relaxed text-text-2">
+              <strong className="text-[var(--atlas-mint)]">Beginner anchor:</strong>{" "}
+              an LLM is a <em>model</em>. An agent is a <em>system</em> that
+              surrounds a model with goals, tools, memory, and control logic.
+            </p>
+          </div>
           <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="rounded-2xl border border-dashed border-[var(--atlas-cyan)]/35 p-4">
               {[
@@ -484,8 +689,17 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
             number="03"
             eyebrow="LLM → agent"
             title="A model becomes an agent when it gains a loop."
-            copy="An LLM alone is text in, text out. An agent wraps that reasoning engine with purpose, memory, and ways to affect the world."
+            copy="An LLM can suggest what to do. An agent can continue the job: decide a next step, call an allowed tool, inspect the result, and repeat under clear controls."
           />
+          <AgentScaleDiagram reduce={reduce} />
+          <div className="mt-14 border-t border-border pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[var(--atlas-cyan)]">
+              Inside one agent
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-text">
+              Four parts plus one repeating loop
+            </h3>
+          </div>
           <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
             {anatomy.map(({ label, title, description, icon: Icon }) => (
               <motion.div
@@ -538,8 +752,17 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
             number="04"
             eyebrow="Multi-agent systems"
             title="Specialists coordinate through an orchestrator."
-            copy="One agent eventually hits limits. A framework can decompose the goal, route work to specialists, and merge their results into one controlled outcome."
+            copy="A multi-agent system is not a more intelligent model. It is a coordination pattern: one agent breaks down the work, specialists handle separate parts, and their results are combined."
           />
+          <div className="mt-8 grid gap-4 border-y border-border py-6 sm:grid-cols-[44px_1fr]">
+            <Users size={22} className="text-[var(--atlas-amber)]" aria-hidden="true" />
+            <p className="text-sm leading-relaxed text-text-2">
+              <strong className="text-text">Beginner rule:</strong> start with one
+              agent. Add multiple agents only when the work genuinely separates
+              into roles—for example research, implementation, and review.
+              Coordination itself costs time and creates new failure points.
+            </p>
+          </div>
           <div className="mt-14">
             <div className="mx-auto max-w-sm rounded-xl border border-[var(--atlas-cyan)]/70 bg-surface-1 px-5 py-4 text-center">
               <Network className="mx-auto text-[var(--atlas-cyan)]" size={20} aria-hidden="true" />
@@ -594,6 +817,20 @@ export function AgenticAiFieldMap({ topic }: { topic: Topic }) {
             title="Cosmos DB is the knowledge shelf—not the answer engine."
             copy="RAG has two lanes. Ingestion prepares your enterprise knowledge once. Query-time retrieval runs for every question before the LLM produces an answer."
           />
+          <div className="mt-8 grid gap-4 rounded-xl border border-[var(--atlas-cyan)]/45 bg-[color-mix(in_srgb,var(--atlas-cyan)_5%,transparent)] p-5 sm:grid-cols-[44px_1fr]">
+            <FileText size={22} className="text-[var(--atlas-cyan)]" aria-hidden="true" />
+            <div>
+              <h3 className="text-base font-medium text-text">
+                Think of RAG as an open-book exam
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-text-2">
+                The model is not retrained for every question. The system first
+                finds the most relevant pages from your knowledge base, places
+                those pages beside the question, and then asks the model to
+                answer from that evidence.
+              </p>
+            </div>
+          </div>
           <div className="mt-12 grid gap-10 lg:grid-cols-2">
             <FlowLane label="Lane A · ingestion" detail="offline / done once" steps={ingestion} />
             <FlowLane label="Lane B · query" detail="live / every request" steps={query} amber />
