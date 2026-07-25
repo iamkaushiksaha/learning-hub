@@ -1,52 +1,55 @@
 @import "tailwindcss";
 
-/* ---- House design tokens (web-experience-design/aesthetic-direction.md) ---- */
+/* ---- House design tokens: Blackcurrant Atlas ---- */
 :root,
 [data-theme="dark"] {
-  --bg: #0b0d11;
-  --surface-1: #14171d;
-  --surface-2: #1c2027;
-  --border: #262b34;
-  --border-strong: #39404c;
-  --text: #f2f4f8;
-  --text-2: #a6aebf;
-  --text-3: #7a8290;
-  --accent: #7c6bff;
-  --accent-2: #a78bfa;
-  --accent-soft: #1b1930;
-  --accent-contrast: #0b0d11;
-  --cat-teal: #5dcaa5;
-  --cat-teal-bg: #10312d;
-  --cat-coral: #f0997b;
-  --cat-coral-bg: #3a2114;
-  /* Code card — intentionally dark in BOTH themes (not overridden below) */
-  --code-bg: #0f1218;
-  --code-header: #171b24;
-  --code-border: #272d38;
-  --code-text: #e7eaf0;
-  --code-muted: #808a9c;
+  --bg: #0a0b0f;
+  --surface-1: #111319;
+  --surface-2: #191c24;
+  --border: #242833;
+  --border-strong: #3a4050;
+  --text: #f2f3f7;
+  --text-2: #adb4c4;
+  --text-3: #747d8e;
+  --accent: #9b7cff;
+  --accent-2: #b49cff;
+  --accent-soft: #1d1934;
+  --accent-contrast: #090a0e;
+  --cat-teal: #62d4b0;
+  --cat-teal-bg: #0d3029;
+  --cat-coral: #f28d72;
+  --cat-coral-bg: #392019;
+  --grid-line: rgba(155, 124, 255, 0.065);
+  --hero-glow: rgba(115, 76, 255, 0.16);
+  /* Code and diagram panels stay dark in both themes. */
+  --code-bg: #0d0f14;
+  --code-header: #141720;
+  --code-border: #272c38;
+  --code-text: #e9ebf1;
+  --code-muted: #7c8699;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --bg: #fbfbfd;
+  --bg: #fafafd;
   --surface-1: #ffffff;
-  --surface-2: #f2f3f7;
-  --border: #e4e7ee;
-  --border-strong: #cdd2dd;
-  --text: #14171d;
-  --text-2: #4c5568;
-  --text-3: #667085;
-  --accent: #5b4be0;
-  --accent-2: #4536c4;
-  --accent-soft: #eef0fe;
+  --surface-2: #f1f2f7;
+  --border: #e2e5ed;
+  --border-strong: #c8cedb;
+  --text: #14161c;
+  --text-2: #50596c;
+  --text-3: #6c7586;
+  --accent: #6548df;
+  --accent-2: #5035c3;
+  --accent-soft: #eeebff;
   --accent-contrast: #ffffff;
-  --cat-teal: #0f6e56;
-  --cat-teal-bg: #e1f5ee;
-  --cat-coral: #993c1d;
-  --cat-coral-bg: #faece7;
-  /* code-* tokens intentionally inherit the dark values from :root */
+  --cat-teal: #0f755b;
+  --cat-teal-bg: #def5ec;
+  --cat-coral: #a64226;
+  --cat-coral-bg: #fae9e3;
+  --grid-line: rgba(80, 53, 195, 0.07);
+  --hero-glow: rgba(101, 72, 223, 0.1);
   --shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
   color-scheme: light;
 }
@@ -89,6 +92,155 @@ body {
   background: color-mix(in srgb, var(--accent) 32%, transparent);
 }
 
+.atlas-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 42px 42px;
+  background-position: center;
+}
+
+.atlas-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 72%, var(--bg));
+}
+
+.atlas-hero-glow {
+  background:
+    radial-gradient(circle at 72% 40%, var(--hero-glow), transparent 34%),
+    radial-gradient(circle at 28% 82%, color-mix(in srgb, var(--cat-teal) 8%, transparent), transparent 26%);
+}
+
+.atlas-orbit,
+.atlas-path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 48%, var(--border));
+  stroke-width: 1;
+}
+
+.atlas-orbit {
+  stroke-dasharray: 2 8;
+}
+
+.atlas-orbit-muted,
+.atlas-path-muted {
+  opacity: 0.35;
+}
+
+.atlas-core {
+  fill: color-mix(in srgb, var(--surface-1) 88%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 64%, var(--border));
+  stroke-width: 1.2;
+}
+
+.atlas-core-label,
+.atlas-core-title {
+  fill: var(--text-3);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.atlas-core-title {
+  fill: var(--text);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.atlas-node {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  min-width: 152px;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-1) 88%, transparent);
+  padding: 9px 11px;
+  color: var(--text-2);
+  font-size: 12px;
+  line-height: 1.2;
+  backdrop-filter: blur(12px);
+  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.atlas-node:hover,
+.atlas-node:focus-visible {
+  transform: translate(-50%, calc(-50% - 3px));
+  color: var(--text);
+  outline: none;
+}
+
+.atlas-node-accent:hover,
+.atlas-node-accent:focus-visible {
+  border-color: var(--accent);
+}
+
+.atlas-node-teal:hover,
+.atlas-node-teal:focus-visible {
+  border-color: var(--cat-teal);
+}
+
+.atlas-node-coral:hover,
+.atlas-node-coral:focus-visible {
+  border-color: var(--cat-coral);
+}
+
+.atlas-node-code {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.topic-preview-node {
+  fill: rgba(18, 21, 28, 0.86);
+  stroke: var(--code-border);
+  stroke-width: 1;
+}
+
+.topic-preview-label,
+.topic-preview-sub {
+  fill: var(--code-text);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.topic-preview-sub {
+  fill: var(--code-muted);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+
+.topic-preview-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 6 6;
+  animation: topic-flow 1.2s linear infinite paused;
+}
+
+.topic-preview-path-alert {
+  stroke: var(--cat-coral);
+}
+
+.group:hover .topic-preview-path,
+.group:focus-within .topic-preview-path {
+  animation-play-state: running;
+}
+
+@keyframes topic-flow {
+  to { stroke-dashoffset: -12; }
+}
+
 /* ---- Diagram classes (theme-aware) ---- */
 .dg-box { fill: var(--surface-2); stroke: var(--border-strong); }
 .dg-accent { fill: var(--accent-soft); stroke: var(--accent); }
@@ -106,8 +258,22 @@ body {
 /* ---- Prose helpers ---- */
 .prose-w { max-width: 68ch; }
 
+@media (max-width: 640px) {
+  .atlas-node {
+    min-width: 118px;
+    padding: 7px 8px;
+    font-size: 10px;
+  }
+
+  .atlas-node-code {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
