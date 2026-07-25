@@ -74,7 +74,7 @@ export const TOPICS: Topic[] = [
     date: "2026-07-25",
     verifiedAt: "2026-07-25",
     difficulty: "foundation",
-    readingMinutes: 11,
+    readingMinutes: 15,
     visualType: "state-machine",
     featured: true,
   },
