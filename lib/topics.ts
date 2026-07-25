@@ -1,4 +1,5 @@
 export type CategoryId =
+  | "ai"
   | "git"
   | "devops"
   | "detection"
@@ -48,6 +49,7 @@ export interface Topic {
 }
 
 export const CATEGORIES: Category[] = [
+  { id: "ai", name: "AI & agentic systems", blurb: "Models, agents, orchestration, RAG, and applied AI architecture" },
   { id: "git", name: "Git & collaboration", blurb: "Version control, branching, worktrees, team workflows" },
   { id: "devops", name: "DevOps & automation", blurb: "CI/CD, detection-as-code, IaC, pipelines" },
   { id: "detection", name: "Detection engineering", blurb: "Analytic rules, use cases, tuning, MITRE mapping" },
@@ -57,6 +59,25 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const TOPICS: Topic[] = [
+  {
+    title: "From Machine Learning to Agentic AI",
+    slug: "from-ml-to-agentic-ai",
+    category: "ai",
+    description:
+      "One continuous signal path from rule-based AI and machine learning to LLMs, autonomous agents, multi-agent orchestration, and enterprise RAG with Cosmos DB.",
+    outcome:
+      "Explain what turns an LLM into an agent, how specialist agents coordinate, and where retrieval and Cosmos DB sit in the end-to-end RAG flow.",
+    tags: ["AI", "machine learning", "LLM", "agents", "RAG", "Cosmos DB"],
+    concepts: ["transformers", "reasoning loop", "tool use", "multi-agent orchestration", "vector retrieval"],
+    prerequisites: ["none"],
+    related: [],
+    date: "2026-07-25",
+    verifiedAt: "2026-07-25",
+    difficulty: "foundation",
+    readingMinutes: 11,
+    visualType: "state-machine",
+    featured: true,
+  },
   {
     title: "Git collaboration: branches, forks & conflicts",
     slug: "git-collaboration",
