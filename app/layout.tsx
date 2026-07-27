@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
+import { SITE_URL, SITE_NAME, SITE_AUTHOR, SITE_DESCRIPTION } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,12 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Security Research Hub",
-    template: "%s · Security Research Hub",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "Kaushik Saha's learning and research hub — Microsoft Sentinel, detection engineering, DevOps automation, threat hunting, and security architecture.",
+  description: SITE_DESCRIPTION,
+  authors: [{ name: SITE_AUTHOR }],
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

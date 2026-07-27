@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTopic } from "@/lib/topics";
+import { TopicJsonLd } from "@/components/content/json-ld";
 import { Chip } from "@/components/content/chip";
 import { Callout } from "@/components/content/callout";
 import { CodeBlock } from "@/components/content/code-block";
@@ -15,6 +16,21 @@ const topic = getTopic("git-worktrees")!;
 export const metadata: Metadata = {
   title: topic.title,
   description: topic.description,
+  keywords: topic.tags,
+  openGraph: {
+    type: "article",
+    title: topic.title,
+    description: topic.description,
+    url: `/topics/${topic.slug}`,
+    publishedTime: topic.date,
+    tags: topic.tags,
+  },
+  twitter: {
+    card: "summary",
+    title: topic.title,
+    description: topic.description,
+  },
+  alternates: { canonical: `/topics/${topic.slug}` },
 };
 
 const toc = [
@@ -31,6 +47,7 @@ export default function Page() {
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 pb-24 pt-10 lg:grid-cols-[220px_minmax(0,1fr)]">
       <Toc entries={toc} />
       <article className="min-w-0">
+        <TopicJsonLd topic={topic} />
         <div className="text-[13px] text-text-3">
           <Link href="/" className="hover:text-accent">Home</Link>
           {" / Git & collaboration"}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getTopic } from "@/lib/topics";
+import { TopicJsonLd } from "@/components/content/json-ld";
 import { Chip } from "@/components/content/chip";
 import { Callout } from "@/components/content/callout";
 import { CodeBlock } from "@/components/content/code-block";
@@ -18,6 +19,21 @@ const topic = getTopic("detection-as-code-cicd")!;
 export const metadata: Metadata = {
   title: topic.title,
   description: topic.description,
+  keywords: topic.tags,
+  openGraph: {
+    type: "article",
+    title: topic.title,
+    description: topic.description,
+    url: `/topics/${topic.slug}`,
+    publishedTime: topic.date,
+    tags: topic.tags,
+  },
+  twitter: {
+    card: "summary",
+    title: topic.title,
+    description: topic.description,
+  },
+  alternates: { canonical: `/topics/${topic.slug}` },
 };
 
 const toc = [
@@ -40,6 +56,7 @@ export default function Page() {
       <Toc entries={toc} />
 
       <article className="min-w-0">
+        <TopicJsonLd topic={topic} />
         <div className="text-[13px] text-text-3">
           <Link href="/" className="hover:text-accent">Home</Link>
           {" / DevOps & automation"}
@@ -60,6 +77,17 @@ export default function Page() {
           Sentinel workspace through git, pull requests, and pipelines, with
           every change visible, reviewed, reversible, and attributable.
         </Lead>
+
+        <Callout variant="idea" title="TL;DR">
+          <strong>Detection-as-Code</strong> is managing Sentinel analytic
+          rules through git and CI/CD. Best practice:{" "}
+          <strong>one repo, two branches, two workspaces</strong> — author in
+          the dev UI, export JSON, PR into <Code>develop</Code> (auto-deploys
+          to dev Sentinel), then promote to <Code>main</Code> (deploys to
+          prod). The pipeline calls a deploy engine (ARM/Bicep or Terraform);
+          both go through the Azure Resource Manager API. The payoff is
+          governance: audit trail, rollback, drift correction, and scale.
+        </Callout>
 
         <H2 id="what-is-it">What this practice is called</H2>
         <P>
