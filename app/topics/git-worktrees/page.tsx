@@ -24,11 +24,13 @@ export const metadata: Metadata = {
     url: `/topics/${topic.slug}`,
     publishedTime: topic.date,
     tags: topic.tags,
+    images: [`/og/${topic.slug}`],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: topic.title,
     description: topic.description,
+    images: [`/og/${topic.slug}`],
   },
   alternates: { canonical: `/topics/${topic.slug}` },
 };

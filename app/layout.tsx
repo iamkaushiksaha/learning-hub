@@ -30,11 +30,13 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: "/",
+    images: ["/og/home"],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: ["/og/home"],
   },
   robots: { index: true, follow: true },
 };
