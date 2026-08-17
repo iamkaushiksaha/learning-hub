@@ -31,11 +31,11 @@ export async function GET(
   const topic = slug === "home" ? undefined : getTopic(slug);
 
   const title =
-    topic?.title ?? "Learning & research, organized.";
+    topic?.title ?? "Learn the system. Defend the outcome.";
   const seriesLine =
     topic?.seriesId && topic.part
       ? `${topic.seriesTitle} · Part ${topic.part} of ${seriesTopics(topic.seriesId).length}`
-      : "Sentinel · detection engineering · DevOps · threat hunting";
+      : "Agentic AI · detection engineering · secure delivery";
   const tags = topic?.tags?.slice(0, 4) ?? [];
 
   return new ImageResponse(

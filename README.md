@@ -1,76 +1,80 @@
-# Security Research Hub
+# KS Security Research
 
-Kaushik's personal learning & research website — a public site for his blog,
-research write-ups, and eventually an about/CV page. Standalone repo, hosted
-on Vercel, shareable per-topic (e.g. on LinkedIn).
+A public, structured cybersecurity learning atlas. The site turns selected
+research into visual explainers, decision frameworks, interactive learning
+paths, and implementation-aware deep dives.
 
-Built with Next.js. Authored with the help of two custom Claude skills:
-`web-experience-design` (design tokens, motion, component patterns) and
-`blog-architect` (content, reader psychology). It replaces an earlier
-vanilla-static prototype that briefly lived in the private
-`cybersecurity-research` repo.
+The repository is the curated publishing layer. Raw research, private lab
+evidence, customer-sensitive material, and unfinished investigation notes do
+not belong here.
 
-Stack: Next.js 16 (App Router, TypeScript) · Tailwind CSS v4 · framer-motion
-(`motion`) · next-themes · Geist fonts · lucide-react.
+## Learning paths
+
+1. **Agentic AI & security** — LLM foundations, reusable skills, governed
+   agents, LLM observability, evaluation, and SOC integration.
+2. **Detection engineering** — Sentinel Detection-as-Code, validation, CI/CD,
+   and delivery governance.
+3. **Engineering foundations** — Git collaboration, pull requests, conflicts,
+   and parallel worktrees.
+
+The registry in `lib/topics.ts` controls the order, learning stage, level,
+format, metadata, search, sitemap, and Open Graph images.
+
+## Repository roles
+
+| Repository | Role | Visibility |
+|---|---|---|
+| `learning-hub` | Curated public website and publishable source notes | Public |
+| `cybersecurity-research` | Canonical raw research, experiments, and working evidence | Private |
+| `governed-cybersecurity-ai-session` | Standalone interactive presentation artifacts | Public |
+
+See [`content/README.md`](content/README.md) for the editorial workflow and
+public-safety gate.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev
 ```
 
+The local site opens at `http://localhost:3000`.
+
 ```bash
-npm run build && npm start   # production build
+npm run lint
+npm run build
+npm start
 ```
 
 ## Structure
 
-```
+```text
 app/
-  layout.tsx                     # fonts, theme provider, header/footer
-  page.tsx                       # home (renders HomeView)
-  globals.css                    # design tokens (dark default + light) + Tailwind
-  topics/<slug>/page.tsx         # one folder per topic
+  page.tsx                         home learning map
+  topics/<slug>/page.tsx           published topic pages
+  og/[slug]/route.tsx              generated social cards
 components/
-  site/       header, footer, theme-toggle
-  motion/     Reveal, Stagger (framer-motion wrappers)
-  content/    Callout, CodeBlock, Tabs, Accordion, Toc, Figure, TopicCard,
-              Chip, prose primitives, diagrams
-  home/       HomeView (hero, search, category grid)
+  home/                             learning-map experience
+  content/                          prose, diagrams, callouts, navigation
+  site/                             shared header, footer, theme
+content/
+  topics/<slug>/                    editorial source notes and references
 lib/
-  topics.ts   typed topic registry (drives home cards + search)
-  motion.ts   shared easing / spring / variants
+  topics.ts                         typed topic and learning-path registry
+  site.ts                           canonical site metadata
 ```
 
-## Add a topic
+## Add or update a topic
 
-1. Write the content first (via the `blog-architect` skill; run its
-   humanization pass).
-2. Add an entry to `lib/topics.ts` (`TOPICS` array) — title, slug, category,
-   description, tags, date.
-3. Create `app/topics/<slug>/page.tsx` using the content components
-   (`H2`, `P`, `Callout`, `Tabs`, `Accordion`, `CodeBlock`, `Figure`,
-   diagrams). Copy an existing topic page as the template.
-4. Design + motion per the `web-experience-design` skill:
-   `workflows/build-topic-page.md` and `workflows/design-review.md`.
+1. Create or update `content/topics/<slug>/README.md` with audience, promise,
+   claims, implementation status, and public-safety review.
+2. Record authoritative sources in `content/topics/<slug>/references.md`.
+3. Add the topic to `lib/topics.ts` and place it in one learning path.
+4. Create `app/topics/<slug>/page.tsx` using the shared visual primitives.
+5. Run lint, production build, and responsive browser checks before review.
 
-## Design tokens
+## Hosting
 
-All colors/spacing come from CSS variables in `app/globals.css`, mapped into
-Tailwind via `@theme inline`. Dark is the default; light is `[data-theme="light"]`.
-To evolve the look, edit the token block (and the skill's `aesthetic-direction.md`)
-— never scatter per-page overrides. All token pairs pass WCAG AA.
-
-## Deploy to Vercel
-
-1. Create a GitHub repo and push this (it is a standalone repo — the app is
-   at the repo root, not a subfolder).
-2. Vercel → New Project → import the repo → framework auto-detected
-   (Next.js), Root Directory `/` → Deploy.
-3. `main` is production; every branch gets a preview URL. Add a custom
-   domain in Vercel project settings when ready.
-
-Note: consider renaming the repo to your preferred public brand name before
-creating the GitHub repo — the name is visible in the repo URL and default
-Vercel URL.
+The repository does not claim a production domain until hosting is configured.
+Set `NEXT_PUBLIC_SITE_URL` to the real canonical HTTPS origin in the deployment
+environment. The local fallback is intentionally `http://localhost:3000`.

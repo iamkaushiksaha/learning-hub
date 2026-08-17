@@ -9,9 +9,14 @@ export function SiteHeader() {
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-[13px] font-semibold text-accent-contrast">
             KS
           </span>
-          <span className="tracking-tight">Security Research Hub</span>
+          <span className="tracking-tight">KS Security Research</span>
         </Link>
         <div className="flex-1" />
+        <nav aria-label="Primary navigation" className="hidden items-center gap-5 text-sm text-text-2 md:flex">
+          <Link href="/#learning-paths" className="transition-colors hover:text-text">Learning map</Link>
+          <Link href="/topics/governed-agentic-ai-cybersecurity" className="transition-colors hover:text-text">Agentic AI</Link>
+          <Link href="/topics/langfuse-for-cybersecurity" className="transition-colors hover:text-text">Langfuse + SOC</Link>
+        </nav>
         <ThemeToggle />
       </div>
     </header>

@@ -85,6 +85,69 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.learning-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--border) 54%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 54%, transparent) 1px, transparent 1px),
+    radial-gradient(circle at 76% 18%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 34%);
+  background-size: 72px 72px, 72px 72px, 100% 100%;
+  mask-image: linear-gradient(to bottom, black, transparent 94%);
+}
+
+.signal-map {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface-1) 88%, transparent);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.signal-map ol::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 7%;
+  right: 7%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-strong), var(--accent), var(--cat-teal));
+}
+
+.signal-node {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--surface-1);
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.signal-node-active {
+  background: var(--cat-teal);
+  box-shadow: 0 0 0 1px var(--cat-teal), 0 0 22px color-mix(in srgb, var(--cat-teal) 60%, transparent);
+  animation: signal-pulse 2.4s ease-in-out infinite;
+}
+
+.topic-row {
+  transition: background-color 180ms ease, padding 180ms ease;
+}
+
+@media (hover: hover) {
+  .topic-row:hover {
+    background: color-mix(in srgb, var(--surface-1) 72%, transparent);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+@keyframes signal-pulse {
+  50% { transform: scale(1.28); }
+}
+
 ::selection {
   background: color-mix(in srgb, var(--accent) 32%, transparent);
 }

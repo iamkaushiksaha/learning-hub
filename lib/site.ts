@@ -1,9 +1,9 @@
-/** Site-wide constants. Set NEXT_PUBLIC_SITE_URL on Vercel (or leave the
- *  fallback while local); every absolute URL derives from this. */
+/** Set NEXT_PUBLIC_SITE_URL in the chosen hosting environment. The local
+ * fallback avoids claiming an unrelated production URL. */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://learning-hub.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export const SITE_NAME = "Security Research Hub";
+export const SITE_NAME = "KS Security Research";
 export const SITE_AUTHOR = "Kaushik Saha";
 export const SITE_DESCRIPTION =
-  "Kaushik Saha's learning and research hub — Microsoft Sentinel, detection engineering, DevOps automation, threat hunting, and security architecture.";
+  "A structured cybersecurity learning atlas covering governed agentic AI, LLM observability, detection engineering, and secure delivery.";
