@@ -39,6 +39,15 @@ export const CATEGORIES: Category[] = [
 
 export const TOPICS: Topic[] = [
   {
+    title: "Governed Agentic AI for Cybersecurity",
+    slug: "governed-agentic-ai-cybersecurity",
+    category: "architecture",
+    description:
+      "A four-session visual learning path from LLMs and reusable skills to agentic security risks, governed orchestration, and a hands-on cybersecurity agent workshop.",
+    tags: ["Agentic AI", "LLMs", "AI security", "cybersecurity", "skills"],
+    date: "2026-08-17",
+  },
+  {
     title: "Git collaboration: branches, forks & conflicts",
     slug: "git-collaboration",
     category: "git",
