@@ -1,7 +1,11 @@
 /** Set NEXT_PUBLIC_SITE_URL in the chosen hosting environment. The local
  * fallback avoids claiming an unrelated production URL. */
+const railwayUrl = process.env.RAILWAY_PUBLIC_DOMAIN
+  ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+  : undefined;
+
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ?? railwayUrl ?? "http://localhost:3000";
 
 export const SITE_NAME = "KS Security Research";
 export const SITE_AUTHOR = "Kaushik Saha";

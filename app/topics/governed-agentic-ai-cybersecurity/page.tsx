@@ -19,9 +19,9 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 
 const topic = getTopic("governed-agentic-ai-cybersecurity")!;
 const presentationUrl =
-  "https://iamkaushiksaha.github.io/governed-cybersecurity-ai-session/series/";
+  "/presentations/governed-agentic-ai/series/";
 const repositoryUrl =
-  "https://github.com/iamkaushiksaha/governed-cybersecurity-ai-session";
+  "https://github.com/iamkaushiksaha/learning-hub";
 
 export const metadata: Metadata = {
   title: topic.title,
@@ -49,7 +49,7 @@ const toc = [
   { id: "journey", label: "The four-session journey" },
   { id: "audience", label: "Who it is designed for" },
   { id: "learning-design", label: "How the experience works" },
-  { id: "where-it-lives", label: "Repository and hosted URL" },
+  { id: "where-it-lives", label: "Presentation and learning pages" },
 ];
 
 const sessions = [
@@ -225,9 +225,9 @@ export default function Page() {
           Start with the problem statement, ask the audience to make a choice before revealing the architecture, and use the simulations as discussion prompts—not as claims of production performance. Explainability remains a future clinic rather than expanding this foundation series into full XAI coverage.
         </Callout>
 
-        <H2 id="where-it-lives">Repository and hosted URL</H2>
+        <H2 id="where-it-lives">Presentation and learning pages</H2>
         <P>
-          This learning-hub page is the discovery and context layer. The presentation remains in its own public repository so it has one canonical source, a clean full-screen experience and an independently shareable URL.
+          The presentation and the technical-learning pages now share one public repository and one canonical site. The full-screen HTML runtime remains isolated under the presentations route, while the learning hub provides searchable explanations, FAQs, references, and a complete concept catalog.
         </P>
         <div className="mt-5 divide-y divide-border border-y border-border">
           <div className="grid gap-2 py-5 sm:grid-cols-[160px_1fr]">
@@ -237,7 +237,7 @@ export default function Page() {
             </a>
           </div>
           <div className="grid gap-2 py-5 sm:grid-cols-[160px_1fr]">
-            <span className="font-mono text-xs uppercase tracking-wide text-text-3">Public source</span>
+            <span className="font-mono text-xs uppercase tracking-wide text-text-3">Unified public source</span>
             <a href={repositoryUrl} target="_blank" rel="noreferrer" className="break-all text-sm font-medium text-accent hover:text-accent-2">
               {repositoryUrl}
             </a>

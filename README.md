@@ -2,7 +2,7 @@
 
 A public, structured cybersecurity learning atlas. The site turns selected
 research into visual explainers, decision frameworks, interactive learning
-paths, and implementation-aware deep dives.
+paths, technical-learning articles, and full-screen presentation experiences.
 
 The repository is the curated publishing layer. Raw research, private lab
 evidence, customer-sensitive material, and unfinished investigation notes do
@@ -10,11 +10,17 @@ not belong here.
 
 ## Learning paths
 
-1. **Agentic AI & security** — LLM foundations, reusable skills, governed
-   agents, LLM observability, evaluation, and SOC integration.
-2. **Detection engineering** — Sentinel Detection-as-Code, validation, CI/CD,
+1. **Agentic AI foundations** — LLMs, instructions, projects, skills, tools,
+   MCP, RAG, bounded loops, and orchestration.
+2. **Secure agentic systems** — prompt injection, excessive agency, connected
+   context, guardrails, technology layers, Langfuse, and SOC integration.
+3. **Cybersecurity Orchestrator** — control-plane architecture, specialist
+   flows, ArchStudio, artifacts, lineage, and roadmap discipline.
+4. **Build and secure an agent** — scoped task design, threat modelling,
+   controls, evaluations, and release readiness.
+5. **Detection engineering** — Sentinel Detection-as-Code, validation, CI/CD,
    and delivery governance.
-3. **Engineering foundations** — Git collaboration, pull requests, conflicts,
+6. **Engineering foundations** — Git collaboration, pull requests, conflicts,
    and parallel worktrees.
 
 The registry in `lib/topics.ts` controls the order, learning stage, level,
@@ -26,7 +32,7 @@ format, metadata, search, sitemap, and Open Graph images.
 |---|---|---|
 | `learning-hub` | Curated public website and publishable source notes | Public |
 | `cybersecurity-research` | Canonical raw research, experiments, and working evidence | Private |
-| `governed-cybersecurity-ai-session` | Standalone interactive presentation artifacts | Public |
+| `governed-cybersecurity-ai-session` | Historical presentation source during migration; archive after verified redirect | Public, transition |
 
 See [`content/README.md`](content/README.md) for the editorial workflow and
 public-safety gate.
@@ -51,7 +57,9 @@ npm start
 ```text
 app/
   page.tsx                         home learning map
-  topics/<slug>/page.tsx           published topic pages
+  topics/[slug]/page.tsx           data-driven technical-learning pages
+  topics/<slug>/page.tsx           bespoke long-form topic pages
+  presentations/page.tsx           presentation library
   og/[slug]/route.tsx              generated social cards
 components/
   home/                             learning-map experience
@@ -59,6 +67,9 @@ components/
   site/                             shared header, footer, theme
 content/
   topics/<slug>/                    editorial source notes and references
+  topic-map.md                      presentation-to-learning-page coverage
+public/
+  presentations/governed-agentic-ai/  consolidated static presentation runtime
 lib/
   topics.ts                         typed topic and learning-path registry
   site.ts                           canonical site metadata
@@ -73,8 +84,10 @@ lib/
 4. Create `app/topics/<slug>/page.tsx` using the shared visual primitives.
 5. Run lint, production build, and responsive browser checks before review.
 
-## Hosting
+## Hosting and release
 
-The repository does not claim a production domain until hosting is configured.
-Set `NEXT_PUBLIC_SITE_URL` to the real canonical HTTPS origin in the deployment
-environment. The local fallback is intentionally `http://localhost:3000`.
+The application is prepared for Railway as a standalone Next.js service. See
+[`DEPLOYMENT.md`](DEPLOYMENT.md) for the first deployment, canonical URL,
+health, smoke checks, observation, and rollback. The repository does not claim
+a production domain until deployment is verified. The local fallback is
+intentionally `http://localhost:3000`.

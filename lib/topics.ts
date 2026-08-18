@@ -7,7 +7,10 @@ export type CategoryId =
   | "delivery";
 
 export type LearningPathId =
+  | "agentic-foundations"
   | "agentic-security"
+  | "cyber-orchestrator"
+  | "build-secure-agent"
   | "detection-engineering"
   | "engineering-foundations";
 
@@ -57,19 +60,66 @@ export const CATEGORIES: Category[] = [
 
 export const LEARNING_PATHS: LearningPath[] = [
   {
-    id: "agentic-security",
+    id: "agentic-foundations",
     index: "01",
-    name: "Agentic AI & security",
-    promise: "Understand the capability, secure the loop, and operate it with evidence.",
-    outcome: "Move from informed AI use to governed cybersecurity agents without losing human accountability.",
+    name: "Agentic AI foundations",
+    promise: "Build the mental models before adding autonomy.",
+    outcome: "Choose confidently between chat, projects, skills, tools, a bounded agent loop, and multi-agent orchestration.",
     topicSlugs: [
       "governed-agentic-ai-cybersecurity",
+      "llm-prompts-and-context",
+      "instructions-data-and-trust",
+      "chat-projects-and-reusable-context",
+      "cybersecurity-skill-anatomy",
+      "tools-mcp-and-rag",
+      "agentic-loop-state-and-stop-conditions",
+      "single-vs-multi-agent-orchestration",
+    ],
+  },
+  {
+    id: "agentic-security",
+    index: "02",
+    name: "Secure agentic systems",
+    promise: "Treat every new capability as a new trust boundary.",
+    outcome: "Design for prompt injection, excessive agency, poisoned context, guarded execution, and observable safe failure.",
+    topicSlugs: [
+      "prompt-injection-and-trust-boundaries",
+      "excessive-agency-and-blast-radius",
+      "mcp-tool-retrieval-and-memory-security",
+      "guardrails-hitl-and-control-planes",
+      "secure-agent-technology-stack",
       "langfuse-for-cybersecurity",
     ],
   },
   {
+    id: "cyber-orchestrator",
+    index: "03",
+    name: "Cybersecurity Orchestrator",
+    promise: "Turn specialist expertise into a governed delivery system.",
+    outcome: "Understand the control spine, capability flows, architecture artifacts, lineage, and evidence-driven roadmap.",
+    topicSlugs: [
+      "cybersecurity-orchestrator-architecture",
+      "specialist-cybersecurity-capability-flows",
+      "archstudio-mcp-architecture-assurance",
+      "artifacts-journals-and-lineage",
+      "current-vs-future-agentic-security",
+    ],
+  },
+  {
+    id: "build-secure-agent",
+    index: "04",
+    name: "Build and secure an agent",
+    promise: "Move from bounded task to defensible release evidence.",
+    outcome: "Build, threat-model, attack, evaluate, and make an accountable ship decision for a first cybersecurity agent.",
+    topicSlugs: [
+      "build-first-cybersecurity-agent",
+      "threat-model-agent-tools-and-data",
+      "agent-evaluation-and-release-readiness",
+    ],
+  },
+  {
     id: "detection-engineering",
-    index: "02",
+    index: "05",
     name: "Detection engineering",
     promise: "Turn detection logic into a testable, governed delivery pipeline.",
     outcome: "Ship Sentinel analytics with traceable changes, automated quality gates, and deployment discipline.",
@@ -80,7 +130,7 @@ export const LEARNING_PATHS: LearningPath[] = [
   },
   {
     id: "engineering-foundations",
-    index: "03",
+    index: "06",
     name: "Engineering foundations",
     promise: "Build the collaboration habits that make automation safe to change.",
     outcome: "Use branches, pull requests, conflict handling, and worktrees confidently across parallel work.",
@@ -97,11 +147,23 @@ export const TOPICS: Topic[] = [
       "A four-session visual learning path from LLMs and reusable skills to agentic security risks, governed orchestration, and a hands-on cybersecurity agent workshop.",
     tags: ["Agentic AI", "LLMs", "AI security", "cybersecurity", "skills"],
     date: "2026-08-17",
-    pathId: "agentic-security",
+    pathId: "agentic-foundations",
     stage: "Foundation",
     level: "Start here",
     format: "Interactive series",
   },
+  ...LEARNING_ARTICLES.map((article): Topic => ({
+    title: article.title,
+    slug: article.slug,
+    category: article.pathId === "cyber-orchestrator" ? "delivery" : "architecture",
+    description: article.description,
+    tags: article.tags,
+    date: "2026-08-18",
+    pathId: article.pathId,
+    stage: article.stage,
+    level: article.level,
+    format: article.slug === "build-first-cybersecurity-agent" ? "Hands-on guide" : "Deep dive",
+  })),
   {
     title: "Langfuse for cybersecurity: an SOC lens",
     slug: "langfuse-for-cybersecurity",
@@ -214,3 +276,4 @@ export function seriesNeighbors(topic: Topic): { prev?: Topic; next?: Topic } {
   const i = chapters.findIndex((t) => t.slug === topic.slug);
   return { prev: chapters[i - 1], next: chapters[i + 1] };
 }
+import { LEARNING_ARTICLES } from "./learning-articles";

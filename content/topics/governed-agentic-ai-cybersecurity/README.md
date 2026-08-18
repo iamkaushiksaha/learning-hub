@@ -20,6 +20,7 @@ accountability behind AI terminology.
 
 ## Canonical artifact
 
-The interactive presentation is maintained separately at
-<https://github.com/iamkaushiksaha/governed-cybersecurity-ai-session>.
-This hub topic is its discovery, context, and learning-map page.
+The interactive presentation is consolidated under
+`public/presentations/governed-agentic-ai/` in this repository. The hub topic is
+its discovery and context page; `content/topic-map.md` connects every teaching
+segment to deeper technical-learning pages.

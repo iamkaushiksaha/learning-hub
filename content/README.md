@@ -12,8 +12,10 @@ and what was deliberately excluded from publication.
   source links, and implementation snapshots.
 - **Topic page:** the final reader experience—visual, concise, and traceable to
   this source folder.
-- **Standalone presentation repository:** presentation code and delivery assets
-  that need an independent full-screen URL.
+- **Presentation library:** full-screen static presentation assets live under
+  `public/presentations/` in this repository so articles and sessions share one
+  canonical domain. The former standalone repository is retained only through
+  the migration and archival window.
 
 ## Topic lifecycle
 
@@ -27,6 +29,11 @@ Each topic source folder should contain:
   source supports.
 - Optional public-safe diagrams or example inputs when they materially improve
   the explanation.
+
+The governed-agentic-AI curriculum uses a data-driven article source in
+`lib/learning-articles.ts` plus `content/topic-map.md`. That map proves coverage
+between the presentation scenes and durable pages and avoids duplicating the
+same current-state claim across dozens of folders.
 
 ## Public-safety gate
 

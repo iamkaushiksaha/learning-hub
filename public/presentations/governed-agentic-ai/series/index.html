@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Cybersecurity × Agentic AI — Four-Session Series</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='25' fill='%234ca8ff'/%3E%3Cpath d='M20 33l8 8 17-20' fill='none' stroke='%2306111d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="presentation.css">
+  <style>
+    body{overflow:auto;min-height:100%;--accent:#4ca8ff;--accent-rgb:76,168,255}
+    .hub{min-height:100svh;display:grid;grid-template-columns:minmax(380px,.84fr) minmax(600px,1.16fr);position:relative}
+    .hub-intro{min-height:100svh;padding:7vh 5vw;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);background:linear-gradient(145deg,rgba(76,168,255,.08),transparent 48%)}
+    .hub-brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800}.hub-brand i{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent)}
+    .hub-intro h1{font-size:clamp(58px,6vw,96px);max-width:660px}.hub-intro .lede{max-width:620px}.series-meta{display:flex;gap:26px;font:10px var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+    .session-grid{display:grid;grid-template-rows:repeat(4,1fr);min-height:100svh}.session-link{position:relative;display:grid;grid-template-columns:90px 1fr 90px;align-items:center;gap:24px;padding:28px 4.5vw;text-decoration:none;border-bottom:1px solid var(--line);overflow:hidden;transition:.35s var(--ease)}.session-link:last-child{border-bottom:0}.session-link::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(var(--tone),.12),transparent 70%);opacity:0;transition:.35s}.session-link:hover::before{opacity:1}.session-link:hover{padding-left:5.2vw}.session-num{font:700 42px var(--mono);color:rgba(255,255,255,.12);position:relative}.session-copy{position:relative}.session-copy .label{color:rgb(var(--tone))}.session-copy h2{font-size:clamp(27px,2.7vw,46px);margin-bottom:8px}.session-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.session-arrow{position:relative;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:24px;transition:.3s}.session-link:hover .session-arrow{background:rgb(var(--tone));border-color:rgb(var(--tone));color:var(--bg);transform:rotate(-12deg)}
+    .s1{--tone:76,168,255}.s2{--tone:255,112,120}.s3{--tone:62,224,193}.s4{--tone:170,140,255}
+    .hub-orbit{position:absolute;width:300px;height:300px;border:1px solid rgba(76,168,255,.16);border-radius:50%;left:4vw;top:42%;pointer-events:none}.hub-orbit::before,.hub-orbit::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(62,224,193,.12)}.hub-orbit::before{width:180px;height:180px;left:59px;top:59px}.hub-orbit::after{width:12px;height:12px;background:var(--accent);border:0;left:144px;top:-6px;box-shadow:0 0 26px var(--accent);animation:hubSpin 9s linear infinite;transform-origin:6px 156px}@keyframes hubSpin{to{transform:rotate(360deg)}}
+    @media(max-width:1000px){body{overflow:auto}.hub{grid-template-columns:1fr}.hub-intro{min-height:74svh;border-right:0;border-bottom:1px solid var(--line)}.session-grid{min-height:auto}.session-link{min-height:190px;grid-template-columns:64px 1fr 60px}.hub-orbit{right:2vw;left:auto;opacity:.55}}
+  </style>
+</head>
+<body>
+  <main class="hub">
+    <section class="hub-intro">
+      <div class="hub-brand"><i></i> Cybersecurity × Agentic AI</div>
+      <div>
+        <div class="eyebrow">Interactive learning series</div>
+        <h1>From chat.<br><span class="accent">To governed capability.</span></h1>
+        <p class="lede">Four visual sessions for cybersecurity practitioners and leaders—fundamentals, security architecture, the working product, and a hands-on build.</p>
+        <div class="chips"><span class="chip">4 × 60 minutes</span><span class="chip">Interactive</span><span class="chip">Fact-checked</span></div>
+      </div>
+      <div class="series-meta"><span>Progressive story</span><span>Speaker notes</span><span>Source links</span></div>
+      <div class="hub-orbit"></div>
+    </section>
+    <nav class="session-grid" aria-label="Session selection">
+      <a class="session-link s1" href="01-from-chat-to-agentic-work.html"><span class="session-num">01</span><span class="session-copy"><span class="label">Foundations</span><h2>From Chat to Agentic Work</h2><p>LLMs, prompts, projects, skills, tools, the agent loop, and when multi-agent earns its complexity.</p></span><span class="session-arrow">→</span></a>
+      <a class="session-link s2" href="02-securing-agentic-ai.html"><span class="session-num">02</span><span class="session-copy"><span class="label">Security architecture</span><h2>Securing Agentic AI</h2><p>Prompt injection, excessive agency, guardrails, trust boundaries, frameworks, and the governed stack.</p></span><span class="session-arrow">→</span></a>
+      <a class="session-link s3" href="03-cyber-orchestrator-in-action.html"><span class="session-num">03</span><span class="session-copy"><span class="label">Product story</span><h2>Cyber Orchestrator in Action</h2><p>Current capabilities, architecture, live workflows, measurable value, and the governance roadmap.</p></span><span class="session-arrow">→</span></a>
+      <a class="session-link s4" href="04-build-secure-cybersecurity-agent.html"><span class="session-num">04</span><span class="session-copy"><span class="label">Hands-on workshop</span><h2>Build and Secure Your First Cybersecurity Agent</h2><p>Design a bounded architecture-review agent, attack it, add controls, evaluate it, and decide if it may ship.</p></span><span class="session-arrow">→</span></a>
+    </nav>
+  </main>
+</body>
+</html>
