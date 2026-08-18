@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build && npm run bundle:standalone",
     "bundle:standalone": "cp -R public .next/standalone/public && cp -R .next/static .next/standalone/.next/static",
-    "start": "node .next/standalone/server.js",
+    "start": "HOSTNAME=0.0.0.0 node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
