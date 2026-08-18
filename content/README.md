@@ -35,6 +35,12 @@ The governed-agentic-AI curriculum uses a data-driven article source in
 between the presentation scenes and durable pages and avoids duplicating the
 same current-state claim across dozens of folders.
 
+## Audience and delivery audits
+
+- `presentation-audience-review.md` — audience clarity, cognitive load, color
+  semantics, interaction verification, viewport evidence and recommended
+  60-minute pacing for the summary presentation.
+
 ## Public-safety gate
 
 Before publishing, confirm that content contains no secrets, credentials,
