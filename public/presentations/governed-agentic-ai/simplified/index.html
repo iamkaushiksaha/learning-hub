@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Governed Agentic AI for Cybersecurity — Proof-first session</title>
+  <meta name="description" content="A proof-first interactive session about turning repeated cybersecurity work into governed, observable agentic-AI delivery.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 5 55 15v17c0 14-9 23-23 27C18 55 9 46 9 32V15z' fill='%234da7ff'/%3E%3Cpath d='m21 32 7 7 15-17' fill='none' stroke='%2306111d' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <style>
+    :root{
+      --bg:#06111d;--bg2:#091827;--bg3:#0d2135;--text:#eef6ff;--muted:#a9bdd0;
+      --line:rgba(163,191,221,.2);--blue:#4da7ff;--teal:#44dfc4;--amber:#ffbd55;
+      --coral:#ff747c;--purple:#ae91ff;--green:#7ce494;--shadow:0 30px 90px rgba(0,0,0,.42);
+      --ease:cubic-bezier(.2,.82,.2,1);--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+    }
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--sans)}
+    body{background:radial-gradient(circle at 88% 7%,rgba(77,167,255,.15),transparent 31%),radial-gradient(circle at 8% 95%,rgba(68,223,196,.08),transparent 29%),var(--bg)}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 94%)}
+    button,a{font:inherit}button{color:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+    .app{position:relative;width:100%;height:100%;isolation:isolate}.chrome{position:fixed;z-index:60;top:0;left:0;right:0;height:58px;display:flex;align-items:center;gap:18px;padding:0 26px;border-bottom:1px solid var(--line);background:rgba(6,17,29,.82);backdrop-filter:blur(18px)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:290px;font-size:13px;font-weight:780}.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 20px var(--blue)}
+    .chapter{flex:1;text-align:center;color:var(--muted);font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase}.tools{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:290px}.timer{margin-left:8px;color:var(--muted);font:11px var(--mono)}
+    .icon-btn,.nav-btn,.action,.choice,.tree-btn,.risk-btn,.recall-btn{border:1px solid var(--line);background:rgba(255,255,255,.035);cursor:pointer;transition:.22s var(--ease)}
+    .icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--muted);text-decoration:none}.icon-btn:hover,.nav-btn:hover,.action:hover,.choice:hover,.tree-btn:hover,.risk-btn:hover,.recall-btn:hover{border-color:rgba(77,167,255,.72);color:var(--text);transform:translateY(-1px)}
+    .progress{position:fixed;z-index:65;top:57px;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));box-shadow:0 0 14px rgba(77,167,255,.55);transition:width .35s var(--ease)}
+    .stage{position:absolute;inset:58px 0 56px;overflow:hidden}.scene{position:absolute;inset:0;display:grid;align-items:center;padding:clamp(26px,4vw,66px) clamp(34px,6.5vw,112px);opacity:0;visibility:hidden;pointer-events:none;transform:translateX(28px) scale(.992);transition:opacity .28s var(--ease),transform .34s var(--ease);overflow:hidden}.scene.active{z-index:2;opacity:1;visibility:visible;pointer-events:auto;transform:none}.scene::after{content:attr(data-index);position:absolute;right:4vw;bottom:2vh;color:rgba(255,255,255,.027);font:800 clamp(60px,8vw,126px)/1 var(--mono);pointer-events:none}
+    .scene[data-index="06"],.scene[data-index="10"]{padding-top:26px;padding-bottom:26px}
+    .content{position:relative;z-index:2;width:min(1280px,100%);margin:auto}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4.5vw,72px);align-items:center}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    h1,h2,h3,p{margin-top:0}h1{max-width:1020px;margin-bottom:22px;font-size:clamp(50px,6vw,90px);line-height:.96;letter-spacing:-.057em}h2{max-width:1120px;margin-bottom:18px;font-size:clamp(38px,4.45vw,66px);line-height:1.02;letter-spacing:-.047em}h3{margin-bottom:9px;font-size:clamp(18px,1.65vw,25px);line-height:1.16}.lede{max-width:900px;color:#c0d0df;font-size:clamp(18px,1.65vw,24px);line-height:1.48}.small{color:var(--muted);font-size:14px;line-height:1.55}.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:var(--blue);font:700 12px var(--mono);letter-spacing:.15em;text-transform:uppercase}.eyebrow::before{content:"";width:32px;height:1px;background:currentColor}.accent{color:var(--blue)}.teal{color:var(--teal)}.amber{color:var(--amber)}.coral{color:var(--coral)}.purple{color:var(--purple)}.green{color:var(--green)}.mono{font-family:var(--mono)}
+    .fragment{opacity:0;transform:translateY(11px);transition:.3s var(--ease)}.fragment.revealed{opacity:1;transform:none}.label{margin-bottom:8px;color:var(--muted);font:700 11px var(--mono);letter-spacing:.11em;text-transform:uppercase}.action{min-height:44px;border-radius:11px;padding:10px 16px;color:var(--muted);font:700 12px var(--mono);letter-spacing:.04em}.action.primary{border-color:var(--blue);background:var(--blue);color:var(--bg)}.action.safe{border-color:rgba(68,223,196,.55);color:var(--teal)}.action.risk{border-color:rgba(255,116,124,.55);color:var(--coral)}.action:disabled{opacity:.3;cursor:not-allowed;transform:none}.action-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}.status{min-height:50px;margin-top:15px;padding:13px 16px;border-left:2px solid var(--blue);background:rgba(77,167,255,.045);color:#cbd9e7;font:12px/1.55 var(--mono)}
+    .nav{position:fixed;z-index:60;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;gap:14px;padding:0 24px;border-top:1px solid var(--line);background:rgba(6,17,29,.86);backdrop-filter:blur(18px)}.counter{width:90px;color:var(--muted);font:12px var(--mono)}.counter b{color:var(--text)}.nav-title{flex:1;overflow:hidden;color:var(--muted);font-size:13px;text-align:center;text-overflow:ellipsis;white-space:nowrap}.nav-btn{min-height:40px;border-radius:9px;padding:8px 15px;color:var(--muted);font:700 11px var(--mono);letter-spacing:.07em;text-transform:uppercase}.nav-btn.primary{border-color:var(--text);background:var(--text);color:var(--bg)}.nav-btn:disabled{opacity:.25;cursor:not-allowed;transform:none}
+
+    /* 01 — outcome first */
+    .outcome-map{position:relative;height:480px;display:grid;place-items:center}.request-core{position:relative;z-index:3;width:180px;height:180px;border:1px solid rgba(77,167,255,.62);border-radius:50%;display:grid;place-items:center;text-align:center;padding:26px;background:radial-gradient(circle at 35% 25%,#245282,#0b1c2e 68%);font-weight:820;box-shadow:0 0 70px rgba(77,167,255,.2)}.control-ring{position:absolute;width:455px;height:455px;border:1px dashed rgba(68,223,196,.35);border-radius:50%;animation:slowspin 38s linear infinite}.control-ring::before{content:"IDENTITY · GATES · CHECKS · HUMAN DECISIONS · EVIDENCE";position:absolute;left:50%;top:-11px;transform:translateX(-50%);padding:5px 12px;background:var(--bg);color:var(--teal);font:10px var(--mono);white-space:nowrap}.outcome{position:absolute;z-index:4;width:180px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0a1b2c;box-shadow:var(--shadow);text-align:center}.outcome b{display:block;font-size:15px}.outcome span{display:block;margin-top:6px;color:var(--muted);font:11px/1.45 var(--mono)}.outcome.o1{top:24px;left:24px}.outcome.o2{right:-8px;top:164px}.outcome.o3{left:36px;bottom:20px}.map-line{position:absolute;height:2px;width:150px;background:linear-gradient(90deg,rgba(77,167,255,.05),var(--blue));transform-origin:left center}.ml1{transform:rotate(-132deg)}.ml2{transform:rotate(4deg)}.ml3{transform:rotate(126deg)}.route-strip{display:flex;align-items:center;gap:9px;margin-top:28px;color:var(--muted);font:12px var(--mono)}.route-strip b{color:var(--text)}.route-strip i{flex:1;height:1px;background:linear-gradient(90deg,var(--blue),var(--teal))}@keyframes slowspin{to{transform:rotate(360deg)}}
+
+    /* 02 — authentic product proof */
+    .product-layout{display:grid;grid-template-columns:330px 1fr;gap:32px;align-items:stretch;margin-top:24px}.product-menu{display:grid;gap:10px}.choice{min-height:96px;padding:16px;border-radius:13px;text-align:left;color:var(--muted)}.choice b{display:block;margin-bottom:6px;color:var(--text);font-size:16px}.choice span{font-size:13px;line-height:1.45}.choice.active{border-color:var(--blue);background:rgba(77,167,255,.1);transform:translateX(5px)}.product-panel{padding:18px;border:1px solid var(--line);border-radius:17px;background:#080d14;box-shadow:var(--shadow);overflow:hidden}.product-shot{position:relative;height:350px;overflow:hidden;border-radius:10px;background:#0b0f14}.product-shot img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:.96;transition:opacity .18s var(--ease),transform .32s var(--ease)}.product-shot.changing img{opacity:.2;transform:scale(.985)}.product-explain{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:15px}.product-explain div{padding-top:11px;border-top:1px solid var(--line)}.product-explain b{display:block;color:var(--teal);font:11px var(--mono);letter-spacing:.08em}.product-explain p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45}.product-proof{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:13px;color:var(--muted);font:11px/1.4 var(--mono)}.product-proof span{padding:7px 9px;border:1px solid var(--line);border-radius:99px}.product-proof b{color:var(--green)}
+
+    /* 03 — prompt stack */
+    .prompt-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}.prompt-window{padding:20px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.025);box-shadow:var(--shadow)}.prompt-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--line);font:12px var(--mono)}.prompt-head span{color:var(--muted)}.prompt-lines{display:grid;gap:8px;margin-top:15px}.prompt-line{display:grid;grid-template-columns:122px 1fr;gap:12px;align-items:center;min-height:43px;padding:10px 13px;border-left:2px solid var(--blue);background:rgba(77,167,255,.045);color:#cbd9e7;font-size:13px}.prompt-line em{color:var(--blue);font:700 10px var(--mono);font-style:normal;letter-spacing:.07em}.prompt-result{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:11px;padding:11px 13px;border:1px solid rgba(68,223,196,.36);border-radius:9px;background:rgba(68,223,196,.045);color:#c9dedb;font-size:12px}.prompt-result b{color:var(--teal);font:11px var(--mono);letter-spacing:.06em}.repeat-label{margin:15px 0 8px;color:var(--muted);font:700 10px var(--mono);letter-spacing:.09em}.repeat-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.repeat-step{min-height:66px;padding:10px 11px;border:1px solid var(--line);border-radius:9px;color:var(--muted);font:10px/1.35 var(--mono)}.repeat-step span{display:block;margin-bottom:6px;color:var(--blue)}.repeat-step b{display:block;color:var(--text);font:700 12px/1.3 var(--sans)}.limit-list{display:grid;gap:0}.limit{padding:16px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}.limit b{display:block;margin-bottom:4px;color:var(--text)}.bridge-callout{margin-top:18px;padding:15px 17px;border-left:2px solid var(--teal);background:rgba(68,223,196,.045);color:#c9dedb;font-weight:720}
+
+    /* 04 — progression */
+    .progression-intro{margin:-2px 0 0;color:#c0d0df;font-size:clamp(16px,1.4vw,20px)}.progression{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:24px}.progression .choice{position:relative;min-height:140px;overflow:visible}.progression .choice::after{content:"→";position:absolute;right:-10px;top:54px;z-index:3;color:var(--muted);font-size:18px}.progression .choice:last-child::after{display:none}.progression .num{color:var(--blue);font:11px var(--mono)}.progression h3{margin:16px 0 7px}.maturity-inspector{display:grid;grid-template-columns:1.05fr 1.2fr .85fr;gap:1px;margin-top:17px;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--line)}.maturity-inspector>div{padding:15px;background:var(--bg2)}.maturity-inspector span{display:block;margin-bottom:7px;color:var(--teal);font:10px var(--mono);letter-spacing:.09em}.maturity-inspector p{margin:0;color:#c5d3e0;font-size:13px;line-height:1.45}.progression-takeaway{margin-top:13px;padding-left:15px;border-left:2px solid var(--blue);color:#c7d7e6;font-size:14px;font-weight:720}
+
+    /* 05 — skill */
+    .xray{display:grid;grid-template-columns:390px 1fr;margin-top:22px;border:1px solid var(--line);border-radius:17px;overflow:hidden;background:rgba(255,255,255,.018)}.tree{padding:22px;background:#071522}.tree-btn{display:block;width:100%;min-height:44px;padding:10px;border:0;border-radius:7px;background:none;text-align:left;color:#b5c8d9;font:13px/1.3 var(--mono)}.tree-btn.active,.tree-btn:hover{background:rgba(77,167,255,.12);color:var(--text);transform:none}.tree-btn.folder{color:var(--blue)}.tree-btn.file{padding-left:34px;color:var(--teal)}.xray-panel{min-height:315px;padding:26px 30px;border-left:1px solid var(--line)}.xray-panel .big-icon{margin-bottom:12px;color:rgba(77,167,255,.3);font:800 48px var(--mono)}.xray-panel ul{padding-left:20px;color:var(--muted);font-size:14px;line-height:1.7}.script-run{height:8px;margin-top:18px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}.script-run i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--green));transition:width 1.4s var(--ease)}.script-run.running i{width:100%}.exec-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:14px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line)}.exec-strip div{padding:10px;background:var(--bg2);font:11px/1.4 var(--mono);text-align:center;color:var(--muted)}.exec-strip b{color:var(--blue)}
+
+    /* 06 — agentic application */
+    .agent-layout{display:grid;grid-template-columns:1.04fr .96fr;gap:44px;align-items:center}.agent-system{position:relative;height:470px;border:1px dashed rgba(77,167,255,.42);border-radius:28px;background:radial-gradient(circle at 50% 48%,rgba(77,167,255,.12),transparent 34%);transition:.35s var(--ease)}.agent-system::before{content:"AGENTIC APPLICATION";position:absolute;top:14px;left:20px;color:var(--blue);font:700 11px var(--mono);letter-spacing:.12em}.llm-core{position:absolute;left:calc(50% - 80px);top:calc(50% - 80px);z-index:3;width:160px;height:160px;border:1px solid var(--blue);border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 35% 25%,#255486,#0a1a2a 68%);font-size:27px;font-weight:850;box-shadow:0 0 50px rgba(77,167,255,.22)}.llm-core span{display:block;color:var(--muted);font:11px var(--mono)}.agent-part{position:absolute;width:170px;min-height:72px;padding:12px;border:1px solid var(--line);border-radius:11px;background:#0a1a2a;color:var(--muted);font-size:12px;line-height:1.4;text-align:center;transition:.35s var(--ease)}.agent-part b{display:block;margin-bottom:4px;color:var(--text);font-size:13px}.ap1{left:35px;top:64px}.ap2{right:35px;top:64px}.ap3{left:15px;top:195px}.ap4{right:15px;top:195px}.ap5{left:35px;bottom:42px}.ap6{right:35px;bottom:42px}.agent-system.llm-only .agent-part{opacity:.15;filter:saturate(.2)}.agent-system.blocked .ap4{border-color:var(--coral);background:rgba(255,116,124,.08);color:var(--coral);transform:translateY(-4px)}.agent-system.blocked .ap6{border-color:var(--amber);background:rgba(255,189,85,.07);transform:translateY(-4px)}.agent-flow{display:grid;gap:0}.flow-row{display:grid;grid-template-columns:42px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}.flow-row b{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--blue);border-radius:50%;color:var(--blue);font:11px var(--mono)}.flow-row strong{display:block;margin-bottom:3px;color:var(--text)}
+
+    /* 07 — multi-agent */
+    .handoff-canvas{margin-top:28px;padding:25px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.02)}.handoff-flow{display:flex;align-items:center;justify-content:center;gap:10px;min-height:170px}.handoff-node{position:relative;min-width:150px;max-width:175px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);text-align:center;color:var(--muted);font-size:13px;transition:.35s var(--ease)}.handoff-node b{display:block;margin-bottom:6px;color:var(--text)}.handoff-node.orch{border-color:var(--blue)}.handoff-node.agent{border-color:var(--teal)}.handoff-node.gate{border-color:var(--amber)}.handoff-arrow{color:var(--muted);font-size:18px}.handoff-flow.simple .multi-only{display:none}.handoff-flow.multi .single-only{display:none}.artifact-packet{position:absolute;z-index:4;right:-28px;top:-13px;padding:6px 8px;border:1px solid var(--teal);border-radius:6px;background:#0b2430;color:var(--teal);font:10px var(--mono);opacity:0}.handoff-flow.running .artifact-packet{animation:packet 3.4s var(--ease) forwards}@keyframes packet{0%{opacity:0;transform:translateX(-90px)}12%{opacity:1}55%{opacity:1;transform:translateX(160px)}82%{opacity:1;transform:translateX(335px)}100%{opacity:0;transform:translateX(420px)}}.ownership{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:17px}.ownership div{padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.45}.ownership b{display:block;margin-bottom:5px;color:var(--text)}
+    .cycle-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0;color:var(--muted);font:11px var(--mono)}.cycle-line span{padding:7px 10px;border:1px solid rgba(255,189,85,.45);border-radius:99px;color:var(--amber)}.cycle-line i{font-style:normal}.product-pipeline{margin-top:20px;padding:22px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.018)}.pipeline-row{display:flex;align-items:center;justify-content:center;gap:9px}.pipeline-row.parallel{margin:15px auto;width:min(760px,100%)}.pipe-node{position:relative;min-width:145px;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);color:var(--muted);font-size:12px;line-height:1.38;text-align:center;transition:.3s var(--ease)}.pipe-node b{display:block;margin-bottom:5px;color:var(--text);font-size:13px}.pipe-node.orch{border-color:var(--blue)}.pipe-node.agent{border-color:var(--purple)}.pipe-node.code{border-color:var(--teal)}.pipe-node.gate{border-color:var(--amber)}.pipe-arrow{color:var(--muted)}.pipe-branch{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1}.pipe-node.active{transform:translateY(-4px);box-shadow:0 0 28px rgba(77,167,255,.2);border-color:var(--blue);color:var(--text)}.pipe-node.done{background:rgba(124,228,148,.055);border-color:var(--green)}.pipeline-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:16px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--line)}.pipeline-proof div{padding:13px;background:var(--bg2);color:var(--muted);font-size:12px;line-height:1.45}.pipeline-proof b{display:block;margin-bottom:4px;color:var(--text);font-size:16px}.pipeline-proof .wow{color:var(--green)}
+
+    /* 08 — OWASP */
+    .owasp-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:30px;align-items:center}.risk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.risk-btn{min-height:64px;padding:11px 13px;border-radius:10px;text-align:left;color:var(--muted);font-size:12px;line-height:1.3}.risk-btn span{display:block;margin-bottom:4px;color:var(--coral);font:10px var(--mono)}.risk-btn b{color:var(--text)}.risk-btn.active{border-color:var(--coral);background:rgba(255,116,124,.09);transform:translateX(4px)}.risk-inspector{min-height:370px;padding:28px;border-left:1px solid var(--line);background:linear-gradient(90deg,rgba(255,116,124,.045),transparent)}.risk-inspector .where{margin:18px 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1.5}.control-callout{padding:14px 16px;border-left:2px solid var(--teal);background:rgba(68,223,196,.045);color:#c9dcd9;font-size:14px;line-height:1.5}.demo-tag{display:inline-block;margin-top:15px;padding:7px 10px;border:1px solid var(--amber);border-radius:99px;color:var(--amber);font:11px var(--mono)}
+
+    /* 09 — security architecture */
+    .layer-shell{position:relative;display:grid;grid-template-columns:52px .9fr 1.1fr 52px;gap:18px;margin-top:20px;align-items:stretch}.cross-rail{display:grid;place-items:center;border:1px solid rgba(255,116,124,.45);border-radius:13px;color:var(--coral);font:700 10px var(--mono);letter-spacing:.12em;writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase}.cross-rail.audit{border-color:rgba(68,223,196,.48);color:var(--teal)}.layer-list{display:grid;gap:6px}.layer-btn{display:grid;grid-template-columns:1fr 32px;align-items:center;min-height:39px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.025);color:var(--muted);text-align:left;cursor:pointer;transition:.22s var(--ease);font-size:12px;font-weight:750}.layer-btn span{color:var(--muted);font:10px var(--mono)}.layer-btn.active,.layer-btn:hover{border-color:var(--blue);background:rgba(77,167,255,.1);color:var(--text);transform:translateX(4px)}.layer-panel{padding:24px;border-left:1px solid var(--line);background:linear-gradient(90deg,rgba(77,167,255,.045),transparent)}.layer-panel .pick{margin:12px 0 18px;color:var(--text);font-size:clamp(23px,2.3vw,34px);font-weight:820}.layer-facts{display:grid;gap:1px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line)}.layer-facts div{padding:12px;background:var(--bg2);color:var(--muted);font-size:13px;line-height:1.45}.layer-facts b{display:block;margin-bottom:4px;color:var(--teal);font:10px var(--mono);letter-spacing:.09em}.asset-line{margin-top:15px;text-align:center;color:var(--teal);font-size:clamp(17px,1.7vw,24px);font-weight:800}
+
+    /* 10 — current vs next */
+    .truth-switch{display:flex;gap:8px;margin:18px 0}.truth-board{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}.truth-col{padding-top:17px;border-top:2px solid var(--green);transition:.3s var(--ease)}.truth-col.next{border-top-color:var(--purple)}.truth-col h3 span{margin-left:7px;padding:4px 7px;border:1px solid currentColor;border-radius:99px;font:10px var(--mono)}.truth-list{display:grid;gap:8px}.truth-item{display:grid;grid-template-columns:22px 1fr;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.42}.truth-item i{font-style:normal;color:var(--green)}.next .truth-item i{color:var(--purple)}.truth-board.show-current .truth-col.next{opacity:.25}.truth-board.show-next .truth-col.current{opacity:.25}.truth-note{margin-top:15px;padding:12px 15px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font:11px/1.5 var(--mono)}
+
+    /* 11 — observability */
+    .obs-bridge{display:grid;grid-template-columns:1fr 170px 1fr;gap:20px;align-items:stretch;margin-top:24px}.obs-col{padding:22px;border-top:2px solid var(--blue);background:linear-gradient(180deg,rgba(77,167,255,.06),transparent)}.obs-col.siem{border-color:var(--teal);background:linear-gradient(180deg,rgba(68,223,196,.055),transparent)}.obs-col ul{padding-left:19px;color:var(--muted);font-size:14px;line-height:1.65}.event-bridge{position:relative;display:grid;place-items:center;text-align:center;color:var(--muted);font:11px/1.5 var(--mono)}.event-track{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal))}.event-packet{position:absolute;z-index:2;left:0;top:calc(50% - 12px);width:24px;height:24px;border:2px solid var(--text);border-radius:50%;background:var(--blue);box-shadow:0 0 20px var(--blue);transition:left 1.4s var(--ease),background .3s}.event-packet.travel{left:calc(50% - 12px);background:var(--amber)}.event-packet.signal{left:calc(100% - 24px);background:var(--teal)}.trace-tree{margin-top:13px;border-left:1px solid var(--line);padding-left:14px}.trace-row{padding:7px 9px;margin:3px 0;border:1px solid transparent;border-radius:7px;color:var(--muted);font:11px var(--mono);transition:.25s}.trace-row.active{border-color:var(--blue);background:rgba(77,167,255,.08);color:var(--text)}.privacy-rail{margin-top:16px;padding:12px 16px;border:1px solid rgba(255,189,85,.38);border-radius:10px;color:#e2cca4;font:11px/1.5 var(--mono);text-align:center}.not-siem{margin-top:12px;color:var(--teal);font-weight:800;text-align:center}
+
+    /* 12 — demo */
+    .demo-layout{display:grid;grid-template-columns:340px 1fr;gap:30px;align-items:start}.request-card{padding:19px;border-left:3px solid var(--blue);background:rgba(77,167,255,.05);font-size:14px;line-height:1.6;color:#cbd8e5}.demo-flow{display:flex;align-items:center;gap:5px;margin-top:12px}.demo-node{flex:1;min-width:0;min-height:92px;padding:9px 6px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;text-align:center;background:var(--bg2);color:var(--muted);font:10px/1.4 var(--mono);transition:.3s var(--ease)}.demo-node.running{border-color:var(--blue);color:var(--text);box-shadow:0 0 24px rgba(77,167,255,.16);transform:translateY(-3px)}.demo-node.done{border-color:var(--green);color:var(--green);background:rgba(124,228,148,.045)}.demo-node.blocked{border-color:var(--amber);color:var(--amber);background:rgba(255,189,85,.055)}.demo-arrow{color:var(--muted);font-size:12px}.artifact-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;min-height:35px}.artifact-chip{padding:8px 10px;border:1px solid rgba(124,228,148,.45);border-radius:7px;color:var(--green);font:10px var(--mono)}.demo-prompts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}.demo-prompts div{padding-top:14px;border-top:1px solid var(--line)}
+
+    /* 13 — close */
+    .recalls{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}.recall-btn{min-height:170px;padding:22px;border-radius:15px;text-align:left;color:var(--muted)}.recall-btn .n{display:block;margin-bottom:24px;color:rgba(77,167,255,.38);font:800 38px var(--mono)}.recall-btn h3{color:var(--text)}.recall-btn.active{border-color:var(--teal);background:rgba(68,223,196,.06);transform:translateY(-4px)}.recall-detail{min-height:58px;margin-top:15px;padding:14px 17px;border-left:2px solid var(--teal);background:rgba(68,223,196,.04);color:#c8dcda;font-size:14px}.teachback{margin-top:15px;padding:14px 17px;border-left:2px solid var(--amber);background:rgba(255,189,85,.045);color:#e0cca6;font-size:14px}.future{margin-top:15px;color:var(--muted);font-size:14px}.future b{color:var(--purple)}
+
+    /* drawers / modal */
+    .drawer{position:fixed;z-index:90;top:0;bottom:0;width:min(540px,92vw);padding:30px;background:#081521;border-left:1px solid var(--line);box-shadow:-30px 0 90px rgba(0,0,0,.48);overflow:auto;transform:translateX(105%);transition:.32s var(--ease)}.drawer.open{transform:none}.drawer.right{right:0}.drawer.left{left:0;border-left:0;border-right:1px solid var(--line);box-shadow:30px 0 90px rgba(0,0,0,.48);transform:translateX(-105%)}.drawer.left.open{transform:none}.drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.drawer h2{font-size:34px}.close-btn{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:none;color:var(--muted);cursor:pointer}.toc-list{display:grid;gap:4px}.toc-list button{display:grid;grid-template-columns:42px 1fr;gap:10px;min-height:48px;padding:12px 10px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--muted);text-align:left;cursor:pointer}.toc-list button:hover,.toc-list button.active{color:var(--text);background:rgba(77,167,255,.06)}.toc-list b{color:var(--blue);font:11px var(--mono)}.notes-body{color:#cbd8e5;font-size:16px;line-height:1.7}.sources-list{display:grid;gap:11px}.sources-list a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:11px;color:#c9d6e2;text-decoration:none}.sources-list a:hover{border-color:var(--blue);color:var(--text)}.sources-list small{display:block;margin-top:5px;color:var(--muted)}
+    .modal,.help{position:fixed;z-index:100;inset:0;display:none;place-items:center;padding:20px;background:rgba(2,8,14,.82);backdrop-filter:blur(16px)}.modal.open,.help.open{display:grid}.modal-box,.help-box{width:min(820px,92vw);max-height:88vh;overflow:auto;padding:28px;border:1px solid var(--line);border-radius:20px;background:#081521;box-shadow:var(--shadow)}.modal-head{display:flex;justify-content:space-between;align-items:center}.trace-detail{display:grid;grid-template-columns:220px 1fr;gap:1px;margin-top:18px;border:1px solid var(--line);background:var(--line)}.trace-detail>div{padding:12px 14px;background:var(--bg2);font:12px/1.5 var(--mono)}.trace-detail .k{color:var(--teal)}.help-grid{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:14px}.help-grid kbd{padding:4px 7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);font:12px var(--mono)}.glossary{display:grid;grid-template-columns:140px 1fr;gap:1px;margin-top:20px;border:1px solid var(--line);background:var(--line)}.glossary div{padding:10px 12px;background:var(--bg2);font-size:13px;line-height:1.45}.glossary .term{color:var(--teal);font-family:var(--mono)}.live{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+
+    @media(max-width:1500px) and (min-height:761px){h1{font-size:clamp(48px,5.25vw,75px)}.outcome-map{height:420px}.agent-system{height:360px}.agent-system .ap3,.agent-system .ap4{top:145px}.agent-system .ap5,.agent-system .ap6{bottom:24px}.product-shot{height:320px}}
+    @media(max-height:760px){.scene{padding-top:18px;padding-bottom:18px}h1{font-size:50px}h2{font-size:39px}.lede{font-size:17px}.outcome-map{height:360px;transform:scale(.82)}.product-shot{height:280px}.prompt-line{min-height:36px;padding:7px 10px}.progression{margin-top:16px}.progression .choice{min-height:115px}.xray-panel{min-height:260px}.agent-system{height:365px;transform:scale(.88)}.security-zones{margin-top:16px}.zone{min-height:260px}.risk-inspector{min-height:310px}.demo-node{min-height:72px}.recall-btn{min-height:135px}.recall-btn .n{margin-bottom:12px}.scene[data-index="09"]{padding-top:10px;padding-bottom:10px}.scene[data-index="09"] .eyebrow{margin-bottom:8px}.scene[data-index="09"] h2{font-size:35px;margin-bottom:8px}.scene[data-index="09"] .layer-shell{margin-top:8px}.scene[data-index="09"] .layer-btn{min-height:35px;padding-top:6px;padding-bottom:6px}.scene[data-index="09"] .layer-panel{padding:18px}.scene[data-index="10"]{padding-top:10px;padding-bottom:10px}.scene[data-index="10"] .eyebrow{margin-bottom:8px}.scene[data-index="10"] h2{font-size:35px;margin-bottom:9px}.scene[data-index="10"] .truth-switch{margin:7px 0}.scene[data-index="10"] .truth-col{padding-top:8px}.scene[data-index="10"] .truth-list{gap:1px}.scene[data-index="10"] .truth-item{padding:5px 0;font-size:12px;line-height:1.25}.scene[data-index="10"] .truth-note{margin-top:7px;padding:7px 10px}}
+    @media(max-width:1100px){.brand,.tools{min-width:auto}.brand span:last-child{display:none}.scene{padding:26px 30px}.grid-2,.prompt-layout,.agent-layout,.owasp-layout,.truth-board,.demo-layout{grid-template-columns:1fr}.outcome-map{height:380px;transform:scale(.82)}.product-layout{grid-template-columns:1fr}.product-menu{grid-template-columns:repeat(3,1fr)}.product-shot{height:300px}.xray{grid-template-columns:1fr}.xray-panel{border-left:0;border-top:1px solid var(--line)}.obs-bridge{grid-template-columns:1fr}.event-bridge{height:80px}.handoff-flow{flex-wrap:wrap}.security-zones{grid-template-columns:1fr 1fr 1fr}.risk-grid{grid-template-columns:repeat(5,1fr)}.risk-btn{min-height:92px}.risk-inspector{min-height:auto;border-left:0;border-top:1px solid var(--line)}.layer-shell{grid-template-columns:38px .88fr 1.12fr 38px;gap:10px}.pipeline-proof{grid-template-columns:1fr 1fr 1fr}}
+    @media(max-width:700px){html,body{overflow:auto}.app{min-height:100svh}.chrome{position:sticky;padding:0 12px}.chapter,.timer,#fullBtn{display:none}.stage{position:relative;inset:auto;min-height:calc(100svh - 114px);overflow:visible}.scene{position:relative;display:none;min-height:calc(100svh - 114px);padding:28px 20px 82px;overflow:visible}.scene.active{display:grid}.nav{position:sticky}.grid-2,.grid-3,.product-layout,.product-menu,.product-explain,.progression,.maturity-inspector,.prompt-layout,.agent-layout,.ownership,.risk-grid,.owasp-layout,.security-zones,.truth-board,.obs-bridge,.demo-layout,.demo-prompts,.recalls{grid-template-columns:1fr}.outcome-map{height:auto;transform:none;display:grid;gap:9px;margin-top:18px}.control-ring,.map-line{display:none}.request-core{position:static;width:145px;height:145px;margin:auto}.outcome,.outcome.o1,.outcome.o2,.outcome.o3{position:static;width:100%;box-shadow:none}.product-shot{height:260px}.product-shot img{height:100%;object-fit:cover;object-position:top;transform:none}.prompt-window{padding:14px}.progression{gap:18px}.progression .choice::after{right:calc(50% - 7px);top:auto;bottom:-18px;transform:rotate(90deg)}.xray{grid-template-columns:1fr}.exec-strip{grid-template-columns:1fr}.agent-system{height:520px;transform:none}.agent-part{width:145px}.ap1,.ap3,.ap5{left:8px}.ap2,.ap4,.ap6{right:8px}.handoff-flow{display:grid}.handoff-arrow{transform:rotate(90deg);text-align:center}.artifact-packet{display:none}.zone{min-height:auto}.zone::after{display:none}.risk-inspector{padding:20px 0;border-left:0}.truth-board.show-current .truth-col.next,.truth-board.show-next .truth-col.current{opacity:.35}.event-bridge{height:80px}.demo-flow{display:grid}.demo-arrow{transform:rotate(90deg);text-align:center}.drawer{position:fixed}.scene::after{display:none}.nav-title{display:none}.counter{width:auto}.nav{justify-content:space-between}.icon-btn{width:44px;height:44px}.nav-btn{min-height:44px}.brand{font-size:12px}.pipeline-row,.pipeline-row.parallel{display:grid;width:100%;gap:8px}.pipe-branch,.pipeline-proof{grid-template-columns:1fr}.pipe-arrow{transform:rotate(90deg);text-align:center}.layer-shell{grid-template-columns:1fr}.cross-rail{min-height:40px;writing-mode:horizontal-tb;transform:none}.layer-panel{border-left:0;border-top:1px solid var(--line)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.fragment{transform:none}.artifact-packet{display:none}}
+    @media print{html,body{height:auto;overflow:visible;background:#fff}.chrome,.nav,.progress,.drawer,.modal,.help{display:none!important}.stage{position:static}.scene{position:relative;inset:auto;display:grid!important;visibility:visible!important;opacity:1!important;transform:none!important;height:100vh;page-break-after:always;background:#06111d}.fragment{opacity:1!important;transform:none!important}.scene::after{display:none}}
+  </style>
+</head>
+<body data-deck="governed-agentic-ai-proof-first">
+<div class="app">
+  <header class="chrome">
+    <div class="brand"><i class="brand-dot"></i><span>Governed Agentic AI</span><span>for Cybersecurity</span></div>
+    <div class="chapter" id="chapterLabel">Opening</div>
+    <div class="tools">
+      <a class="icon-btn" href="/presentations" aria-label="Presentations home" title="Presentations home">⌂</a>
+      <button class="icon-btn" id="tocBtn" aria-label="Table of contents" title="Table of contents">≡</button>
+      <button class="icon-btn" id="notesBtn" aria-label="Speaker notes" title="Speaker notes">N</button>
+      <button class="icon-btn" id="refsBtn" aria-label="References" title="References">R</button>
+      <button class="icon-btn" id="fullBtn" aria-label="Full screen" title="Full screen">□</button>
+      <button class="icon-btn" id="helpBtn" aria-label="Help and glossary" title="Help and glossary">?</button>
+      <span class="timer" id="timer">00:00</span>
+    </div>
+  </header>
+  <div class="progress" id="progress"></div>
+
+  <main class="stage" id="stage">
+    <section class="scene active" data-index="01" data-chapter="Opening" data-title="One agentic application. Three cybersecurity deliverables." data-notes="Start with the product outcome, not AI terminology. The optimization target is repeated assembly and coordination; expert decisions remain. Name the three outcome families and the control boundary.">
+      <div class="content grid-2">
+        <div>
+          <div class="eyebrow">The outcome first</div>
+          <h1>One agentic application. <span class="accent">Three cybersecurity deliverables.</span></h1>
+          <p class="lede">Reduce repeated delivery effort by turning one governed request into a security review, delivery pack or validated KQL—while experts keep approval.</p>
+          <div class="route-strip fragment" data-reveal="route"><b>Understand</b><i></i><b>Secure</b><i></i><b>Demonstrate</b></div>
+        </div>
+        <div class="outcome-map">
+          <div class="control-ring fragment" data-reveal="boundary"></div>
+          <div class="request-core">Cybersecurity<br>request</div>
+          <i class="map-line ml1"></i><i class="map-line ml2"></i><i class="map-line ml3"></i>
+          <div class="outcome o1 fragment" data-reveal="outcomes"><b>Security review</b><span>findings · evidence · report</span></div>
+          <div class="outcome o2 fragment" data-reveal="outcomes"><b>Delivery pack</b><span>HLD · LLD · plan · architecture</span></div>
+          <div class="outcome o3 fragment" data-reveal="outcomes"><b>KQL studio</b><span>query · MITRE · schema check</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="02" data-chapter="Product proof" data-title="Three real workspaces. One governed delivery engine." data-notes="These are authentic screenshots from the current d7ecd96 console using a clean local fake runtime. Click each workspace and say only input, output and proof. The screenshots are product evidence, not a live model run.">
+      <div class="content">
+        <div class="eyebrow">What we are delivering</div>
+        <h2>Three real workspaces. <span class="accent">One governed delivery engine.</span></h2>
+        <div class="product-layout" data-interactive>
+          <div class="product-menu" id="productMenu">
+            <button class="choice active" data-product="review"><b>01 · Security review</b><span>Diagram or design in → independently checked findings</span></button>
+            <button class="choice" data-product="delivery"><b>02 · Sentinel delivery pack</b><span>Scoping notes in → HLD, LLD, plan and architecture</span></button>
+            <button class="choice" data-product="kql"><b>03 · KQL studio</b><span>Detection intent in → schema-checked KQL</span></button>
+          </div>
+          <div class="product-panel">
+            <div class="product-shot" id="productShot"><img id="productImage" src="assets/product-security-review.png" alt="Current Cyber Orchestrator Security Review workspace"></div>
+            <div class="product-explain" id="productExplain"></div>
+          </div>
+        </div>
+        <div class="product-proof fragment" data-reveal="rail"><span><b>10</b> versioned skills available</span><span><b>253</b> tests collected in the repository audit</span><span><b>0</b> live cloud write actions in Phase 1</span></div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="03" data-chapter="From chat to capability" data-title="Better prompts improve the answer. They do not create a repeatable workflow." data-notes="Start with a simple Sentinel review request. Reveal the reusable system instructions, reference context and expected output. The answer improves, but for the next engagement the user still copies, edits and verifies the method. Chat works; the operating process still lives with the user.">
+      <div class="content prompt-layout">
+        <div>
+          <div class="eyebrow">One answer ≠ repeatable delivery</div>
+          <h2>Better prompts improve the answer. <span class="accent">They do not create a repeatable workflow.</span></h2>
+          <div class="prompt-window">
+            <div class="prompt-head"><b>Security review request</b><span>engagement 01</span></div>
+            <div class="prompt-lines">
+              <div class="prompt-line"><em>USER REQUEST</em><span>Review this Sentinel architecture.</span></div>
+              <div class="prompt-line fragment" data-reveal="grow"><em>SYSTEM INSTRUCTIONS</em><span>Role · rules · expected behaviour</span></div>
+              <div class="prompt-line fragment" data-reveal="grow"><em>REFERENCE CONTEXT</em><span>Architecture · standards · requirements</span></div>
+              <div class="prompt-line fragment" data-reveal="grow"><em>EXPECTED OUTPUT</em><span>Findings · ratings · validation checklist</span></div>
+            </div>
+            <div class="prompt-result fragment" data-reveal="result"><span>LLM response</span><b>STRUCTURED REVIEW DRAFT</b></div>
+            <div class="repeat-label fragment" data-reveal="repeat">WHEN THE NEXT ENGAGEMENT ARRIVES</div>
+            <div class="repeat-flow fragment" data-reveal="repeat">
+              <div class="repeat-step"><span>PROJECT 01</span><b>Build the method</b></div>
+              <div class="repeat-step"><span>PROJECT 02</span><b>Copy + edit it</b></div>
+              <div class="repeat-step"><span>PROJECT 03</span><b>Copy + check again</b></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="limit-list fragment" data-reveal="limits">
+            <div class="limit"><b>Repeat setup</b>Instructions, references and checks are copied or reconstructed.</div>
+            <div class="limit"><b>Method drift</b>Small prompt changes can alter how the review is performed.</div>
+            <div class="limit"><b>Manual control</b>The user still selects inputs, invokes tools, validates results and manages approval.</div>
+          </div>
+          <div class="bridge-callout fragment" data-reveal="bridge">The prompt contains the method. The method is not yet a managed capability.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="04" data-chapter="From chat to capability" data-title="Move what repeats from the prompt into the system." data-notes="This is the solution to Page 3. Move recurring background into persistent context, the expert method into a versioned skill, and bounded execution into an agentic application. Do not imply that every task needs an agent. Claude Projects and custom GPTs are familiar examples of configured persistent context; product capabilities vary.">
+      <div class="content">
+        <div class="eyebrow">Make repeated work reusable</div>
+        <h2>Move what repeats from the prompt <span class="accent">into the system.</span></h2>
+        <p class="progression-intro">Remember the context. Package the method. Control the execution.</p>
+        <div class="progression" id="maturity" data-interactive>
+          <button class="choice active" data-level="chat"><span class="num">01</span><h3>Chat</h3><span>Answer once</span></button>
+          <button class="choice" data-level="context"><span class="num">02</span><h3>Persistent context</h3><span>Remember the background</span></button>
+          <button class="choice" data-level="skill"><span class="num">03</span><h3>Skill</h3><span>Reuse the method</span></button>
+          <button class="choice" data-level="agent"><span class="num">04</span><h3>Agentic application</h3><span>Execute bounded steps</span></button>
+        </div>
+        <div class="maturity-inspector" id="maturityInspector"></div>
+        <div class="progression-takeaway fragment" data-reveal="examples">Less repeated setup. More consistent delivery. Human accountability remains.</div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="05" data-chapter="Reusable expertise" data-title="A skill packages expert work as a reviewable operating playbook." data-notes="Use the security-architect x-ray. Click scripts last so the deterministic validation animation becomes the payoff. Stress that the skill packages expertise but the runtime grants authority.">
+      <div class="content">
+        <div class="eyebrow">Skill anatomy</div>
+        <h2>A skill packages expert work as a <span class="accent">reviewable operating playbook.</span></h2>
+        <div class="xray" data-interactive>
+          <div class="tree" id="skillTree">
+            <button class="tree-btn folder" data-skill="root">▾ security-architect/</button>
+            <button class="tree-btn file active" data-skill="skill">SKILL.md</button>
+            <button class="tree-btn file" data-skill="references">references/</button>
+            <button class="tree-btn file" data-skill="templates">templates/</button>
+            <button class="tree-btn file" data-skill="schemas">schemas/</button>
+            <button class="tree-btn file" data-skill="scripts">scripts/</button>
+          </div>
+          <div class="xray-panel" id="skillPanel"></div>
+        </div>
+        <div class="exec-strip fragment" data-reveal="execution"><div><b>1</b><br>Match request</div><div><b>2</b><br>Load playbook</div><div><b>3</b><br>Read needed references</div><div><b>4</b><br>Run checks</div><div><b>5</b><br>Return typed result</div></div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="06" data-chapter="Agentic AI" data-title="A model becomes an agent when it gains a controlled loop." data-notes="Use the source-image idea but repair the definition. An LLM answers. An agent can plan the next bounded step, request an allowed tool, observe the result and repeat. MCP connects tools or context; it is not itself the agent or security boundary.">
+      <div class="content agent-layout">
+        <div>
+          <div class="eyebrow">LLM → agent</div>
+          <h2>A model becomes an agent when it gains a <span class="accent">controlled loop.</span></h2>
+          <div class="agent-system llm-only" id="agentSystem" data-interactive>
+            <div class="llm-core">LLM<span>reason + propose</span></div>
+            <div class="agent-part ap1"><b>Goal + skills</b>purpose, method and boundaries</div>
+            <div class="agent-part ap2"><b>Tools + MCP</b>approved actions and context</div>
+            <div class="agent-part ap3"><b>State + memory</b>progress, artifacts and evidence</div>
+            <div class="agent-part ap4"><b>Controls</b>limits, validation and approval</div>
+          </div>
+        </div>
+        <div>
+          <div class="agent-flow">
+            <div class="flow-row"><b>1</b><div><strong>LLM</strong>Answers one prompt and normally stops.</div></div>
+            <div class="flow-row"><b>2</b><div><strong>Single agent</strong>Owns one goal and repeats under runtime controls.</div></div>
+            <div class="flow-row"><b>3</b><div><strong>Multi-agent system</strong>An orchestrator coordinates genuinely separate specialist roles.</div></div>
+          </div>
+          <div class="cycle-line"><span>PLAN</span><i>→</i><span>ACT</span><i>→</i><span>OBSERVE</span><i>→</i><span>REPEAT OR STOP</span></div>
+          <div class="action-row"><button class="action" id="llmOnly">LLM only</button><button class="action primary" id="agenticView">Agentic application</button><button class="action risk" id="blockedView">Show blocked action</button></div>
+          <div class="status" id="agentStatus">LLM only: useful draft returned inside the conversation; no controlled external action.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="07" data-chapter="Our orchestration" data-title="The orchestrator coordinates expertise. Code checks the handoffs." data-notes="This is the project's real Sentinel delivery pattern, simplified. Intake produces approved scope. Ingestion/cost and detection work in parallel. G3 mechanically checks their outputs agree. Architecture is then validated and rendered; documents and diagrams are deterministic. Click Run the handoff.">
+      <div class="content">
+        <div class="eyebrow">The real product pattern</div>
+        <h2>The orchestrator coordinates expertise. <span class="accent">Code checks the handoffs.</span></h2>
+        <div class="action-row"><button class="action primary" id="productFlowRun">Run the handoff</button><span class="small" id="productFlowStatus">Ready: scoped request enters the governed pipeline.</span></div>
+        <div class="product-pipeline" id="productFlow" data-interactive>
+          <div class="pipeline-row">
+            <div class="pipe-node orch"><b>Orchestrator</b>order · state · routing</div><span class="pipe-arrow">→</span><div class="pipe-node agent"><b>Intake skill</b>extract typed scope</div><span class="pipe-arrow">→</span><div class="pipe-node gate"><b>Human gate</b>approve scope</div>
+          </div>
+          <div class="pipeline-row parallel">
+            <span class="pipe-arrow">↳</span><div class="pipe-branch"><div class="pipe-node agent"><b>Ingestion + cost</b>collection design</div><div class="pipe-node agent"><b>Detection</b>KQL + MITRE coverage</div></div><span class="pipe-arrow">→</span><div class="pipe-node gate"><b>G3 · code</b>do the designs agree?</div>
+          </div>
+          <div class="pipeline-row">
+            <div class="pipe-node agent"><b>Solution architect</b>synthesize architecture IR</div><span class="pipe-arrow">→</span><div class="pipe-node code"><b>ArchStudio</b>validate + draw.io</div><span class="pipe-arrow">→</span><div class="pipe-node code"><b>Document builder</b>HLD · LLD · plan</div><span class="pipe-arrow">→</span><div class="pipe-node gate"><b>Expert approval</b>release pack</div>
+          </div>
+        </div>
+        <div class="pipeline-proof fragment" data-reveal="owners"><div><b class="wow">5 conflicts caught</b>G3 found real collection↔detection disagreements in the golden run.</div><div><b>Resume, do not restart</b>Completed model work is skipped after an interruption.</div><div><b>Deterministic outputs</b>Documents, diagrams and manifests are rendered by code.</div></div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="08" data-chapter="AI application security" data-title="Useful AI applications create new attack paths. OWASP gives us a shared checklist." data-notes="Show all ten official 2025 names, but explain only four: Prompt Injection, Sensitive Information Disclosure, Improper Output Handling and Excessive Agency. OWASP is a threat catalogue, not an implementation framework.">
+      <div class="content owasp-layout">
+        <div>
+          <div class="eyebrow">OWASP Top 10 for LLM Applications · 2025</div>
+          <h2>Useful AI applications create new attack paths. <span class="coral">Use a shared checklist.</span></h2>
+          <div class="risk-grid" id="riskGrid" data-interactive>
+            <button class="risk-btn active" data-risk="r1"><span>LLM01</span><b>Prompt Injection</b></button>
+            <button class="risk-btn" data-risk="r2"><span>LLM02</span><b>Sensitive Information Disclosure</b></button>
+            <button class="risk-btn" data-risk="r3"><span>LLM03</span><b>Supply Chain</b></button>
+            <button class="risk-btn" data-risk="r4"><span>LLM04</span><b>Data and Model Poisoning</b></button>
+            <button class="risk-btn" data-risk="r5"><span>LLM05</span><b>Improper Output Handling</b></button>
+            <button class="risk-btn" data-risk="r6"><span>LLM06</span><b>Excessive Agency</b></button>
+            <button class="risk-btn" data-risk="r7"><span>LLM07</span><b>System Prompt Leakage</b></button>
+            <button class="risk-btn" data-risk="r8"><span>LLM08</span><b>Vector and Embedding Weaknesses</b></button>
+            <button class="risk-btn" data-risk="r9"><span>LLM09</span><b>Misinformation</b></button>
+            <button class="risk-btn" data-risk="r10"><span>LLM10</span><b>Unbounded Consumption</b></button>
+          </div>
+        </div>
+        <div class="risk-inspector" id="riskInspector"></div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="09" data-chapter="Secure by design" data-title="Security and traceability cross every application layer." data-notes="Do not read ten technologies. Click only UI, Orchestration, Tools/Data and Guardrails. Each click answers three questions: what the layer does, what this product uses now, and what security must ask. The side rails are the point: security and audit are cross-cutting properties, not extra boxes at the bottom.">
+      <div class="content">
+        <div class="eyebrow">The governed agentic stack</div>
+        <h2>Security and traceability <span class="accent">cross every layer.</span></h2>
+        <div class="layer-shell" data-interactive>
+          <div class="cross-rail">Security · may it do this?</div>
+          <div class="layer-list" id="layerList">
+            <button class="layer-btn active" data-layer="ui">UI <span>01</span></button><button class="layer-btn" data-layer="api">API <span>02</span></button><button class="layer-btn" data-layer="orchestration">ORCHESTRATION <span>03</span></button><button class="layer-btn" data-layer="runtime">AGENT RUNTIME <span>04</span></button><button class="layer-btn" data-layer="models">MODELS <span>05</span></button><button class="layer-btn" data-layer="tools">TOOLS / DATA <span>06</span></button><button class="layer-btn" data-layer="state">STATE / MEMORY <span>07</span></button><button class="layer-btn" data-layer="observability">OBSERVABILITY <span>08</span></button><button class="layer-btn" data-layer="evals">EVALS <span>09</span></button><button class="layer-btn" data-layer="guardrails">GUARDRAILS <span>10</span></button>
+          </div>
+          <div class="layer-panel" id="layerPanel"></div>
+          <div class="cross-rail audit">Auditability · what happened?</div>
+        </div>
+        <div class="asset-line fragment" data-reveal="asset">The model can change. The governed control system is the durable asset.</div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="10" data-chapter="Product security truth" data-title="Secure by design means showing what is enforced now—and what is not yet." data-notes="Product truth checked against local main at d7ecd96 on 19 Aug 2026. Green means implemented in the application or repository. Purple means planned. Do not imply Entra SSO, uploaded-document injection screening, OPA/Cedar policy, tenant isolation or SIEM export already exists.">
+      <div class="content">
+        <div class="eyebrow">Current controls versus next layer</div>
+        <h2>Show what is enforced now—<span class="purple">and what is not yet.</span></h2>
+        <div class="truth-switch"><button class="action primary" data-truth="all">Compare both</button><button class="action" data-truth="current">Running today</button><button class="action" data-truth="next">Next security layer</button></div>
+        <div class="truth-board" id="truthBoard" data-interactive>
+          <div class="truth-col current"><h3>Running today <span class="green">VERIFIED</span></h3><div class="truth-list">
+            <div class="truth-item"><i>✓</i><span>Accounts, signed sessions, quota, rate limits and owner-scoped runs</span></div>
+            <div class="truth-item"><i>✓</i><span>LangGraph/YAML orchestration, fail-closed gates and human pauses</span></div>
+            <div class="truth-item"><i>✓</i><span>Structured outputs, per-node token budgets and revision limits</span></div>
+            <div class="truth-item"><i>✓</i><span>Read-only Learn/AWS MCP and Sentinel catalogue connectors with allowlists</span></div>
+            <div class="truth-item"><i>✓</i><span>Deterministic schema gates, journal and artifact lineage manifest</span></div>
+            <div class="truth-item"><i>✓</i><span>Optional Langfuse tracer integration; prompt and response capture is opt-in</span></div>
+            <div class="truth-item"><i>✓</i><span>Locked dependencies, Dependabot, tests, lint and container smoke</span></div>
+            <div class="truth-item"><i>✓</i><span>No live cloud write actions in Phase 1</span></div>
+          </div>
+          </div>
+          <div class="truth-col next"><h3>Next security layer <span class="purple">PLANNED</span></h3><div class="truth-list">
+            <div class="truth-item"><i>◇</i><span>Entra ID SSO/MFA and stronger tenant isolation</span></div>
+            <div class="truth-item"><i>◇</i><span>Per-account API limits and provider spend caps</span></div>
+            <div class="truth-item"><i>◇</i><span>Uploaded-document prompt-injection screening</span></div>
+            <div class="truth-item"><i>◇</i><span>Policy-as-code for tool actions using OPA/Cedar or equivalent</span></div>
+            <div class="truth-item"><i>◇</i><span>Selected security-event export to SIEM</span></div>
+            <div class="truth-item"><i>◇</i><span>SBOM, vulnerability scan, image signing and non-root runtime</span></div>
+            <div class="truth-item"><i>◇</i><span>Evaluation-gated model upgrades and automated alerting</span></div>
+          </div>
+          </div>
+        </div>
+        <div class="truth-note">Evidence boundary · local main d7ecd96 · private GitHub main verified · Railway health returned 10 skills · authenticated Railway configuration was not inspected</div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="11" data-chapter="Observe and respond" data-title="Langfuse explains the AI run. The SIEM explains the security event. Use both." data-notes="Answer the SOC question directly: Langfuse is not a SIEM replacement. Trace the AI workflow, then forward a compact security signal and trace ID—not the full sensitive prompt—to the SIEM side.">
+      <div class="content">
+        <div class="eyebrow">Langfuse and SIEM</div>
+        <h2>Langfuse explains the AI run. <span class="accent">The SIEM explains the security event.</span></h2>
+        <div class="obs-bridge" data-interactive>
+          <div class="obs-col"><div class="label">Langfuse · AI workflow</div><h3>What happened inside the run?</h3><div class="trace-tree"><div class="trace-row">session · user · environment</div><div class="trace-row">orchestrator span</div><div class="trace-row">model generation</div><div class="trace-row">tool + retrieval span</div><div class="trace-row">validation + score</div></div></div>
+          <div class="event-bridge"><i class="event-track"></i><i class="event-packet" id="eventPacket"></i><span>compact security event<br>+ trace ID</span></div>
+          <div class="obs-col siem"><div class="label">SIEM · security operations</div><h3>What does it mean across the environment?</h3><ul><li>Identity and authentication</li><li>Application, cloud and network events</li><li>Cross-source correlation</li><li>Alert, incident and response</li><li>Retention and investigation</li></ul></div>
+        </div>
+        <div class="action-row"><button class="action" id="traceRun">Trace a run</button><button class="action safe" id="sendSignal">Send security signal</button><span class="small" id="bridgeStatus">Ready.</span></div>
+        <div class="not-siem">Langfuse is not a SIEM replacement.</div>
+        <div class="privacy-rail">MINIMIZE · MASK · CONTROL ACCESS TO PROMPTS, RESPONSES, RETRIEVED DATA AND TOOL PAYLOADS</div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="12" data-chapter="Demo" data-title="Follow one request from intent to reviewed evidence." data-notes="Ask the audience whether the workflow should continue before approval. After approval, stages advance slowly enough to explain. Open one artifact and then its trace. This built-in sequence is a rehearsal simulation, not a live backend run.">
+      <div class="content demo-layout">
+        <div>
+          <div class="eyebrow">Live demonstration</div>
+          <h2>Follow one request from <span class="accent">intent to reviewed evidence.</span></h2>
+          <div class="request-card">Design a Microsoft Sentinel platform for a hybrid customer. Produce the HLD, LLD, project plan and editable architecture. Show assumptions, unresolved decisions and validation evidence.</div>
+          <div class="action-row"><button class="action primary" id="demoStart">Start run</button><button class="action safe" id="demoApprove" hidden>Approve scope</button><button class="action" id="demoTrace" disabled>Inspect trace</button></div>
+          <div class="status" id="demoStatus">Rehearsal simulation ready. No backend request has been sent.</div>
+        </div>
+        <div>
+          <div class="label">Intent → evidence</div>
+          <div class="demo-flow" id="demoFlow">
+            <div class="demo-node">Normalize<br>scope</div><span class="demo-arrow">→</span><div class="demo-node">Approval<br>gate</div><span class="demo-arrow">→</span><div class="demo-node">Route<br>specialists</div><span class="demo-arrow">→</span><div class="demo-node">Gather<br>evidence</div><span class="demo-arrow">→</span><div class="demo-node">Run<br>checks</div><span class="demo-arrow">→</span><div class="demo-node">Generate<br>architecture</div><span class="demo-arrow">→</span><div class="demo-node">Assemble<br>pack</div>
+          </div>
+          <div class="artifact-row" id="artifactRow"></div>
+          <div class="demo-prompts fragment" data-reveal="questions"><div><div class="label">Watch</div><h3>Where does it pause?</h3></div><div><div class="label">Verify</div><h3>What is checked mechanically?</h3></div><div><div class="label">Evidence</div><h3>Can we explain the run?</h3></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-index="13" data-chapter="Closing" data-title="Package expertise. Bound action. Preserve evidence." data-notes="Use the teach-back question before Q&A. Clicking each recall statement reveals a concrete example. End with the next-session promise; do not introduce XAI here.">
+      <div class="content">
+        <div class="eyebrow">What to remember</div>
+        <h2>Package expertise. Bound action. <span class="accent">Preserve evidence.</span></h2>
+        <div class="recalls" data-interactive>
+          <button class="recall-btn active" data-recall="skill"><span class="n">01</span><h3>Skill</h3><p>Reusable operating playbook</p></button>
+          <button class="recall-btn" data-recall="orchestrator"><span class="n">02</span><h3>Orchestrator</h3><p>Controlled multi-step coordination</p></button>
+          <button class="recall-btn" data-recall="evidence"><span class="n">03</span><h3>Security + observability</h3><p>Defensible action and evidence</p></button>
+        </div>
+        <div class="recall-detail" id="recallDetail">Example: the security-architect skill versions the review method, references, schemas and deterministic helpers.</div>
+        <div class="teachback fragment" data-reveal="teachback">What belongs in the skill, what belongs in the orchestrator, and what must remain a human decision?</div>
+        <div class="future fragment" data-reveal="future"><b>Next session · Build and Secure Your First Cybersecurity Agent:</b> tenant isolation, policy-as-code, adversarial testing, evaluation datasets, SIEM correlation and controlled write actions.</div>
+        <div class="action-row fragment" data-reveal="future"><button class="action primary" id="restartInside">↻ Start this session again</button><a class="action" href="/" style="text-decoration:none">Explore the Learning Hub →</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="nav"><div class="counter" id="counter"><b>01</b> / 13</div><button class="nav-btn" id="prevBtn">← Back</button><div class="nav-title" id="navTitle">One agentic application. Three cybersecurity deliverables.</div><button class="nav-btn primary" id="nextBtn">Reveal →</button></footer>
+</div>
+
+<aside class="drawer left" id="toc"><div class="drawer-head"><div><div class="label">Navigate</div><h2>Session map</h2></div><button class="close-btn" data-close aria-label="Close">×</button></div><div class="toc-list" id="tocList"></div></aside>
+<aside class="drawer right" id="notes"><div class="drawer-head"><div><div class="label">Presenter view</div><h2>Speaker notes</h2></div><button class="close-btn" data-close aria-label="Close">×</button></div><div class="notes-body" id="notesBody"></div></aside>
+<aside class="drawer right" id="refs"><div class="drawer-head"><div><div class="label">Official sources</div><h2>References</h2></div><button class="close-btn" data-close aria-label="Close">×</button></div><div class="sources-list">
+  <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer">NIST AI Risk Management Framework<small>Risk governance across design, development, use and evaluation</small></a>
+  <a href="https://doi.org/10.6028/NIST.AI.600-1" target="_blank" rel="noreferrer">NIST AI 600-1 · Generative AI Profile<small>GenAI-specific risk management considerations</small></a>
+  <a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noreferrer">OWASP Top 10 for LLM Applications 2025<small>Official application risk catalogue and mitigations</small></a>
+  <a href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noreferrer">Model Context Protocol architecture<small>Hosts, clients, servers, tools, resources and prompts</small></a>
+  <a href="https://openai.github.io/openai-agents-python/" target="_blank" rel="noreferrer">OpenAI Agents SDK<small>Agent loop, tools, guardrails, sessions, handoffs and tracing</small></a>
+  <a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noreferrer">LangGraph overview<small>Durable orchestration, state and human-in-the-loop</small></a>
+  <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" target="_blank" rel="noreferrer">Claude Agent Skills overview<small>Filesystem-based instructions, resources and scripts</small></a>
+  <a href="https://langfuse.com/docs/observability/overview" target="_blank" rel="noreferrer">Langfuse observability<small>LLM traces, metrics, prompts, cost and evaluation</small></a>
+  <a href="https://learn.microsoft.com/en-us/kusto/query/?view=microsoft-fabric" target="_blank" rel="noreferrer">Kusto Query Language overview<small>KQL concepts and Microsoft Sentinel use</small></a>
+</div></aside>
+
+<div class="help" id="help"><div class="help-box"><div class="modal-head"><div><div class="label">Controls and glossary</div><h2 style="font-size:34px">Presentation help</h2></div><button class="close-btn" data-close aria-label="Close">×</button></div><div class="help-grid"><kbd>Space / →</kbd><span>Reveal, then move forward</span><kbd>←</kbd><span>Reverse reveal, then move back</span><kbd>M · N · R</kbd><span>Menu · notes · references</span><kbd>F · ?</kbd><span>Fullscreen · help</span></div><div class="glossary"><div class="term">LLM</div><div>Language model that generates or transforms text and code from context.</div><div class="term">Skill</div><div>Reusable operating playbook with instructions, references and deterministic assets.</div><div class="term">Agent</div><div>Model inside a controlled loop that can choose the next allowed step.</div><div class="term">Tool</div><div>Approved function or service the application may execute.</div><div class="term">MCP</div><div>Standard connection method through which a server exposes tools or context.</div><div class="term">Runtime</div><div>Software managing model turns, tool requests, limits and structured results.</div><div class="term">Orchestrator</div><div>Workflow controller for order, state, routing, retries and approval pauses.</div><div class="term">Trace</div><div>Time-ordered record of the application run.</div></div></div></div>
+
+<div class="modal" id="traceModal" role="dialog" aria-modal="true" aria-labelledby="traceTitle"><div class="modal-box"><div class="modal-head"><div><div class="label teal">Rehearsal trace</div><h2 id="traceTitle" style="font-size:34px">sentinel-delivery-pack · simulated run</h2></div><button class="close-btn" data-close aria-label="Close">×</button></div><div class="trace-detail"><div class="k">root span</div><div>cybersecurity_orchestrator · complete</div><div class="k">scope gate</div><div>human_approval · approved · actor recorded</div><div class="k">specialist work</div><div>intake · ingestion/cost · detection · solution architecture</div><div class="k">validation</div><div>G3 convergence passed · artifact manifest complete · unresolved decisions retained</div><div class="k">outputs</div><div>HLD · LLD · project plan · architecture.drawio · manifest</div><div class="k">security signal</div><div>trace_id + approval_id available for future correlation; prompt payload excluded</div></div><p class="small" style="margin-top:14px">Illustrative trace for presentation rehearsal. The real demo should open the current product run and its actual evidence.</p></div></div>
+<div class="live" id="live" aria-live="polite"></div>
+
+<script>
+(()=>{
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const scenes=$$('.scene'), storageKey='cyber-deck-proof-first-v2';
+  const state={index:Math.max(0,Math.min(scenes.length-1,Number(localStorage.getItem(storageKey)||0))),started:Date.now(),timers:[]};
+  const el={chapter:$('#chapterLabel'),progress:$('#progress'),counter:$('#counter'),title:$('#navTitle'),prev:$('#prevBtn'),next:$('#nextBtn'),toc:$('#toc'),tocList:$('#tocList'),notes:$('#notes'),notesBody:$('#notesBody'),refs:$('#refs'),help:$('#help'),live:$('#live'),modal:$('#traceModal')};
+  const groups=scene=>{const keys=[];$$('.fragment',scene).forEach(f=>{const k=f.dataset.reveal||f.dataset.auto||(f.dataset.auto=Math.random().toString(36));if(!keys.includes(k))keys.push(k)});return keys};
+  const revealGroup=(scene,key,on=true)=>$$('.fragment',scene).filter(f=>(f.dataset.reveal||f.dataset.auto)===key).forEach(f=>f.classList.toggle('revealed',on));
+  const clearTimers=()=>{state.timers.forEach(clearTimeout);state.timers=[]};
+  function updateChrome(){const s=scenes[state.index],gs=groups(s),shown=gs.filter(k=>$$('.fragment',s).some(f=>(f.dataset.reveal||f.dataset.auto)===k&&f.classList.contains('revealed'))).length;el.chapter.textContent=s.dataset.chapter;el.counter.innerHTML=`<b>${String(state.index+1).padStart(2,'0')}</b> / ${String(scenes.length).padStart(2,'0')}`;el.title.textContent=s.dataset.title;el.progress.style.width=`${((state.index+1)/scenes.length)*100}%`;el.prev.disabled=state.index===0&&shown===0;el.next.textContent=state.index===scenes.length-1&&shown===gs.length?'↻ Start again':shown<gs.length?'Reveal →':'Next →';el.notesBody.textContent=s.dataset.notes||'';el.live.textContent=`Page ${state.index+1} of ${scenes.length}: ${s.dataset.title}`;localStorage.setItem(storageKey,state.index);$$('#tocList button').forEach((b,i)=>b.classList.toggle('active',i===state.index))}
+  function show(i,reset=true){if(i<0||i>=scenes.length)return;clearTimers();scenes.forEach(s=>s.classList.remove('active'));state.index=i;const s=scenes[i];s.classList.add('active');if(reset)$$('.fragment',s).forEach(f=>f.classList.remove('revealed'));updateChrome()}
+  function advance(){const s=scenes[state.index],gs=groups(s),next=gs.find(k=>!$$('.fragment',s).some(f=>(f.dataset.reveal||f.dataset.auto)===k&&f.classList.contains('revealed')));if(next){revealGroup(s,next,true);updateChrome();return}if(state.index<scenes.length-1)show(state.index+1,true);else restart()}
+  function back(){const s=scenes[state.index],gs=groups(s),shown=gs.filter(k=>$$('.fragment',s).some(f=>(f.dataset.reveal||f.dataset.auto)===k&&f.classList.contains('revealed')));if(shown.length){revealGroup(s,shown.at(-1),false);updateChrome();return}if(state.index>0)show(state.index-1,false)}
+  function closeOverlays(){[el.toc,el.notes,el.refs,el.help,el.modal].forEach(x=>x?.classList.remove('open'))}
+  function toggle(x){const was=x.classList.contains('open');closeOverlays();if(!was)x.classList.add('open')}
+  function restart(){clearTimers();localStorage.removeItem(storageKey);location.reload()}
+  el.prev.onclick=back;el.next.onclick=advance;$('#tocBtn').onclick=()=>toggle(el.toc);$('#notesBtn').onclick=()=>toggle(el.notes);$('#refsBtn').onclick=()=>toggle(el.refs);$('#helpBtn').onclick=()=>toggle(el.help);$('#fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();$$('[data-close]').forEach(b=>b.onclick=closeOverlays);$('#restartInside').onclick=restart;
+  scenes.forEach((s,i)=>{const b=document.createElement('button');b.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${s.dataset.title}</span>`;b.onclick=()=>{closeOverlays();show(i,true)};el.tocList.appendChild(b)});
+  $('#stage').addEventListener('click',e=>{if(e.target.closest('button,a,[data-interactive]'))return;advance()});
+  document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();advance()}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();back()}else if(e.key.toLowerCase()==='m')toggle(el.toc);else if(e.key.toLowerCase()==='n')toggle(el.notes);else if(e.key.toLowerCase()==='r')toggle(el.refs);else if(e.key.toLowerCase()==='f')$('#fullBtn').click();else if(e.key==='Escape')closeOverlays();else if(e.key==='Home')show(0,true);else if(e.key==='End')show(scenes.length-1,true);else if(e.key==='?')toggle(el.help)});
+  setInterval(()=>{const sec=Math.floor((Date.now()-state.started)/1000);$('#timer').textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`},1000);
+
+  const products={
+    review:{image:'assets/product-security-review.png',alt:'Current Cyber Orchestrator Security Review workspace',input:'Diagram, screenshot, HLD or design description.',output:'Grounded findings, evidence checklist, PDF report and independent validation.'},
+    delivery:{image:'assets/product-delivery-packs.png',alt:'Current Cyber Orchestrator Sentinel Delivery Pack workspace',input:'Microsoft Sentinel scoping notes and decisions.',output:'HLD, LLD, checklist, project plan, editable draw.io architecture and MITRE layer.'},
+    kql:{image:'assets/product-kql-studio.png',alt:'Current Cyber Orchestrator KQL Studio workspace',input:'Log sources and a detection objective.',output:'MITRE-mapped KQL with table, column and engine checks where configured.'}
+  };
+  function setProduct(k){$$('[data-product]').forEach(b=>b.classList.toggle('active',b.dataset.product===k));const d=products[k],shot=$('#productShot'),img=$('#productImage');shot.classList.add('changing');state.timers.push(setTimeout(()=>{img.src=d.image;img.alt=d.alt;shot.classList.remove('changing')},120));$('#productExplain').innerHTML=`<div><b>INPUT</b><p>${d.input}</p></div><div><b>OUTPUT</b><p>${d.output}</p></div>`}$('#productMenu').onclick=e=>{const b=e.target.closest('[data-product]');if(b){clearTimers();setProduct(b.dataset.product)}};setProduct('review');
+
+  const maturity={chat:{shift:'The user supplies the request, method and context.',example:'Draft one Sentinel security review.',human:'Provide everything and verify.'},context:{shift:'The system remembers recurring instructions and knowledge.',example:'Reuse standards, terminology and report structure.',human:'Provide engagement inputs and verify.'},skill:{shift:'The method becomes a versioned playbook with templates, checks and scripts.',example:'Apply the security-architect review method consistently.',human:'Own and approve the method.'},agent:{shift:'The application executes bounded steps with tools, state and approval.',example:'Collect evidence → run checks → request approval → produce artifacts.',human:'Approve consequential decisions.'}};
+  function setMaturity(k){$$('[data-level]',$('#maturity')).forEach(b=>b.classList.toggle('active',b.dataset.level===k));const d=maturity[k];$('#maturityInspector').innerHTML=`<div><span>WHERE THE WORK LIVES</span><p>${d.shift}</p></div><div><span>CYBERSECURITY EXAMPLE</span><p>${d.example}</p></div><div><span>HUMAN ROLE</span><p>${d.human}</p></div>`}$('#maturity').onclick=e=>{const b=e.target.closest('[data-level]');if(b)setMaturity(b.dataset.level)};setMaturity('chat');
+
+  const skills={root:['DIR','Reusable cybersecurity capability',['Versioned and reviewable','Loaded only when relevant','Authority remains in the runtime']],skill:['MD','Scope, trigger, method and boundaries',['Discovery metadata','Operating procedure','Stop and escalation conditions']],references:['REF','Standards, evidence guidance and product facts',['Review lenses','Known-good references','Evidence expectations']],templates:['TPL','Stable artifact structures',['Finding format','Review report','Delivery checklist']],schemas:['{}','Machine-checkable contracts',['Typed intake','Finding schema','Artifact manifest']],scripts:['EXE','Deterministic validation and rendering',['Validate required fields','Calculate or lint','Render repeatable artifacts']]};
+  function setSkill(k){$$('[data-skill]',$('#skillTree')).forEach(b=>b.classList.toggle('active',b.dataset.skill===k));const d=skills[k];$('#skillPanel').innerHTML=`<div class="big-icon">${d[0]}</div><h3>${d[1]}</h3><ul>${d[2].map(x=>`<li>${x}</li>`).join('')}</ul><div class="control-callout">The skill packages expertise. The runtime still controls data, tools and execution authority.</div>${k==='scripts'?'<div class="script-run" id="scriptRun"><i></i></div><p class="small" id="scriptResult" style="margin-top:8px">Running deterministic schema check…</p>':''}`;if(k==='scripts'){requestAnimationFrame(()=>$('#scriptRun').classList.add('running'));state.timers.push(setTimeout(()=>$('#scriptResult').textContent='PASS · 18 required fields present · result typed',1450))}}$('#skillTree').onclick=e=>{const b=e.target.closest('[data-skill]');if(b){clearTimers();setSkill(b.dataset.skill)}};setSkill('skill');
+
+  $('#llmOnly').onclick=()=>{$('#agentSystem').className='agent-system llm-only';$('#agentStatus').textContent='LLM only: useful draft returned inside the conversation; no controlled external action.'};
+  $('#agenticView').onclick=()=>{$('#agentSystem').className='agent-system';$('#agentStatus').textContent='Agentic application: runtime checks policy, executes an approved read-only connector, stores evidence and stops when complete.'};
+  $('#blockedView').onclick=()=>{$('#agentSystem').className='agent-system blocked';$('#agentStatus').textContent='BLOCKED · the model proposed a write-capable action. Policy requires human approval; nothing executed.'};
+
+  $('#productFlowRun').onclick=()=>{clearTimers();const nodes=$$('.pipe-node',$('#productFlow'));nodes.forEach(n=>n.classList.remove('active','done'));$('#productFlowStatus').textContent='Orchestrator is sequencing the approved handoffs…';nodes.forEach((n,i)=>state.timers.push(setTimeout(()=>{if(i)nodes[i-1].classList.remove('active');if(i)nodes[i-1].classList.add('done');n.classList.add('active');$('#productFlowStatus').textContent=['Routing the request.','Extracting a typed scope.','Waiting for human scope approval.','Designing collection and cost.','Designing detections and coverage.','G3 is checking collection ↔ detection consistency.','Synthesizing architecture.','ArchStudio is validating and rendering.','Rendering documents from reviewed templates.','Ready for expert release approval.'][i]},i*520)));state.timers.push(setTimeout(()=>{nodes.at(-1).classList.remove('active');nodes.at(-1).classList.add('done');$('#productFlowStatus').textContent='Complete: artifacts, checks, lineage and approval state are retained.'},nodes.length*520+300))};
+
+  const risks={
+    r1:['Prompt Injection','Untrusted text attempts to redirect the model or workflow.','Input, retrieved documents and tool output can all carry instructions.','Separate instructions from data; constrain tools; require policy checks before action.',true],
+    r2:['Sensitive Information Disclosure','The application exposes confidential data through prompts, outputs, traces or tools.','Model context, retrieved evidence, logs and observability payloads.','Classify and minimize data; mask secrets; scope access and retention.',true],
+    r3:['Supply Chain','A model, package, tool, dataset or external service is compromised.','Dependencies, model providers, skills, MCP servers and build artifacts.','Approve providers; pin, scan and attest dependencies; authenticate connectors.',false],
+    r4:['Data and Model Poisoning','Manipulated data changes model behaviour or corrupts decisions.','Training, fine-tuning, retrieval corpora and reference content.','Control sources, retain provenance and validate evidence against trusted facts.',false],
+    r5:['Improper Output Handling','Unsafe model output is trusted by downstream software.','Generated queries, markup, commands, configuration and documents.','Use schemas, escaping, deterministic validation and safe interpreters.',true],
+    r6:['Excessive Agency','The system receives more authority or autonomy than the task requires.','Broad credentials, unrestricted tools, long loops and missing approval gates.','Least privilege, allowlists, step limits and human approval for consequential action.',true],
+    r7:['System Prompt Leakage','Internal instructions or hidden configuration are disclosed.','Direct responses, tool errors, logs and prompt-debugging views.','Do not store secrets in prompts; minimize disclosure and restrict debug access.',false],
+    r8:['Vector and Embedding Weaknesses','Retrieval design leaks, mixes or selects unsafe context.','Vector stores, embedding pipelines, metadata filters and tenant boundaries.','Tenant isolation, source filtering, provenance and retrieval evaluation.',false],
+    r9:['Misinformation','Confident but incorrect output is accepted as fact.','Reviews, architecture claims, KQL, summaries and recommendations.','Show sources and uncertainty; validate facts; retain accountable human review.',true],
+    r10:['Unbounded Consumption','Attackers or failures consume excessive tokens, tools, time or money.','Long loops, repeated retries, oversized context and public endpoints.','Rate, token, step, time and spend limits with anomaly monitoring.',false]
+  };
+  function setRisk(k){$$('[data-risk]').forEach(b=>b.classList.toggle('active',b.dataset.risk===k));const d=risks[k];$('#riskInspector').innerHTML=`<div class="label">${k.toUpperCase().replace('R','LLM')}</div><h3>${d[0]}</h3><p class="lede" style="font-size:19px">${d[1]}</p><div class="where"><b>WHERE IT APPEARS</b><br>${d[2]}</div><div class="control-callout"><b class="teal">DESIGN RESPONSE</b><br>${d[3]}</div>${d[4]?'<span class="demo-tag">VISIBLE IN THIS SESSION / DEMO</span>':''}`};$('#riskGrid').onclick=e=>{const b=e.target.closest('[data-risk]');if(b)setRisk(b.dataset.risk)};setRisk('r1');
+
+  const layers={
+    ui:['UI','Server-rendered HTML console today; React / Next.js when the multi-user product surface needs it.','Human interaction, intent and approval.','Who may submit, observe and approve? Record the displayed state and approval identity.'],
+    api:['API','FastAPI · REST · background engagement execution.','Typed boundary for uploads, runs, files and approvals.','Authenticate every route, validate uploads, rate-limit and scope every object to its owner.'],
+    orchestration:['ORCHESTRATION','LangGraph StateGraph with the tested kernel retained as fallback; YAML can declare skill-to-skill pipelines.','Order, state, routing, revision caps and pause/resume.','Fail closed, prevent self-approval, and preserve a replayable journal.'],
+    runtime:['AGENT RUNTIME','Provider-neutral AgentRuntime port; OpenAI Responses live-verified and Anthropic adapter code-complete.','Turns a skill task into a model call and structured result.','Budgets, timeouts, schema validation and provider isolation belong here.'],
+    models:['MODELS','OpenAI primary · Anthropic secondary, selected through the runtime port.','Reasoning and structured generation.','Treat output as untrusted; keep the model replaceable and never store secrets in prompts.'],
+    tools:['TOOLS / DATA','Official Learn/AWS MCP · read-only Sentinel catalogue · ArchStudio · deterministic functions.','Ground facts, inspect schemas and create artifacts.','Allowlist hosts and functions, minimize authority, log evidence and prefer read-only access.'],
+    state:['STATE / MEMORY','Append-only JSONL journal + fragments + artifact manifest today; Postgres checkpointer at multi-user scale.','Resume, approvals, ownership, lineage and artifacts.','Separate tenants, encrypt sensitive data, control retention and prevent non-owner writes.'],
+    observability:['OBSERVABILITY','Optional Langfuse tracer behind a port; prompts/responses are opt-in.','Trace node timing, model usage, sessions, scores and provenance.','Minimize trace payloads and forward only selected security signals to the SIEM.'],
+    evals:['EVALS','253 automated tests collected in the repository audit; replay fixtures and golden scenarios offline.','Catch regressions without paying for live model calls.','Gate model or skill upgrades on measured quality, security and cost.'],
+    guardrails:['GUARDRAILS','JSON Schema · six workflow gates · human approval · quotas · budgets · revision caps.','Stop unsafe, invalid or incomplete work before release.','Next: content screening, OPA/Cedar policy, tenant isolation and controlled security-event export.']
+  };
+  function setLayer(k){$$('[data-layer]').forEach(b=>b.classList.toggle('active',b.dataset.layer===k));const d=layers[k];$('#layerPanel').innerHTML=`<div class="label">${d[0]}</div><div class="pick">${d[1]}</div><div class="layer-facts"><div><b>WHAT IT DOES</b>${d[2]}</div><div><b>SECURITY ASKS</b>${d[3]}</div><div><b>AUDIT RECORDS</b>User, action, input/output reference, gate result, timing and release identity.</div></div>`}$('#layerList').onclick=e=>{const b=e.target.closest('[data-layer]');if(b)setLayer(b.dataset.layer)};setLayer('ui');
+
+  $$('[data-truth]').forEach(b=>b.onclick=()=>{$$('[data-truth]').forEach(x=>x.classList.toggle('primary',x===b));const k=b.dataset.truth;$('#truthBoard').className=`truth-board ${k==='all'?'':`show-${k}`}`});
+
+  function resetBridge(){clearTimers();$$('.trace-row').forEach(r=>r.classList.remove('active'));$('#eventPacket').className='event-packet'}
+  $('#traceRun').onclick=()=>{resetBridge();const rows=$$('.trace-row');rows.forEach((r,i)=>state.timers.push(setTimeout(()=>{if(i)rows[i-1].classList.remove('active');r.classList.add('active');$('#bridgeStatus').textContent=['Session linked.','Orchestrator span opened.','Model generation captured.','Tool and retrieval calls linked.','Validation score attached.'][i];if(i===2)$('#eventPacket').classList.add('travel')},i*700)))};
+  $('#sendSignal').onclick=()=>{clearTimers();$('#eventPacket').classList.add('travel','signal');$('#bridgeStatus').textContent='Compact policy signal + trace ID forwarded; sensitive prompt payload excluded.'};
+
+  let demoPaused=false;function demoReset(){clearTimers();demoPaused=false;$$('.demo-node').forEach(n=>n.classList.remove('running','done','blocked'));$('#artifactRow').innerHTML='';$('#demoApprove').hidden=true;$('#demoTrace').disabled=true}
+  $('#demoStart').onclick=()=>{demoReset();const n=$$('.demo-node');n[0].classList.add('running');$('#demoStatus').textContent='Normalizing scope and identifying required decisions…';state.timers.push(setTimeout(()=>{n[0].className='demo-node done';n[1].classList.add('blocked');demoPaused=true;$('#demoApprove').hidden=false;$('#demoStatus').textContent='Paused safely: scope approval is required before specialist work begins.'},1100))};
+  $('#demoApprove').onclick=()=>{if(!demoPaused)return;demoPaused=false;$('#demoApprove').hidden=true;const n=$$('.demo-node');n[1].className='demo-node done';const labels=['Routing bounded specialist work…','Gathering product and architecture evidence…','Running schema and coverage checks…','Generating editable architecture…','Assembling the versioned delivery pack…'];[2,3,4,5,6].forEach((idx,j)=>state.timers.push(setTimeout(()=>{if(idx>2)n[idx-1].classList.add('done');n[idx].classList.add('running');$('#demoStatus').textContent=labels[j]},j*1100)));state.timers.push(setTimeout(()=>{n[6].classList.add('done');$('#demoStatus').textContent='Complete: artifacts, validation evidence and trace are ready.';$('#artifactRow').innerHTML=['HLD.docx','LLD.docx','project-plan.xlsx','architecture.drawio','manifest.json'].map(x=>`<span class="artifact-chip">${x}</span>`).join('');$('#demoTrace').disabled=false},5700))};
+  $('#demoTrace').onclick=()=>toggle(el.modal);
+
+  const recalls={skill:'Example: the security-architect skill versions the review method, references, schemas and deterministic helpers.',orchestrator:'Example: the orchestrator routes the approved scope, limits revisions and records every handoff.',evidence:'Example: validation results, approval identity, artifact hashes and trace ID make the run reviewable.'};
+  $$('.recall-btn').forEach(b=>b.onclick=()=>{$$('.recall-btn').forEach(x=>x.classList.toggle('active',x===b));$('#recallDetail').textContent=recalls[b.dataset.recall]});
+
+  show(state.index,true);
+})();
+</script>
+</body>
+</html>

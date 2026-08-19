@@ -23,6 +23,22 @@ export default function PresentationsPage() {
       </section>
 
       <div className="mx-auto max-w-6xl px-6 pt-12">
+        <section className="mb-8 grid gap-0 overflow-hidden rounded-2xl border border-cat-teal/35 bg-surface-1 lg:grid-cols-[0.72fr_1.28fr]">
+          <div className="border-b border-border p-8 sm:p-10 lg:border-b-0 lg:border-r">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-cat-teal">Recommended · 14 pages · 60 minutes</p>
+            <h2 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-text">The clear path from repeated work to governed delivery.</h2>
+            <a href={`${base}/simplified/`} className="mt-8 inline-flex items-center gap-2 rounded-lg bg-cat-teal px-5 py-3 text-sm font-semibold text-[#06111d] transition-transform hover:-translate-y-0.5">Open simplified session <ArrowRight size={16} /></a>
+          </div>
+          <div className="p-8 sm:p-10">
+            <p className="max-w-2xl text-base leading-relaxed text-text-2">Problem and value, the minimum AI mental model, skill anatomy, bounded agent loop, orchestration, GenAI attack surfaces, secure architecture, Langfuse/SIEM, product and direct demo.</p>
+            <div className="mt-7 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+              <div className="bg-surface-2 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">Audience</p><p className="mt-2 text-sm text-text-2">Cybersecurity + leadership</p></div>
+              <div className="bg-surface-2 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">Format</p><p className="mt-2 text-sm text-text-2">Interactive + presenter notes</p></div>
+              <div className="bg-surface-2 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">Close</p><p className="mt-2 text-sm text-text-2">Demo + next-session teaser</p></div>
+            </div>
+          </div>
+        </section>
+
         <section className="grid gap-0 overflow-hidden rounded-2xl border border-border lg:grid-cols-[1.05fr_0.95fr]">
           <div className="presentation-poster p-8 sm:p-12">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-cat-teal">Four-session series</p>
@@ -31,10 +47,10 @@ export default function PresentationsPage() {
             <a href={`${base}/series/`} className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#55b3ff] px-5 py-3 text-sm font-semibold text-[#06111d] transition-transform hover:-translate-y-0.5">Open four-session series <ArrowRight size={16} /></a>
           </div>
           <div className="bg-surface-1 p-8 sm:p-12">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-text-3">Executive summary</p>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-text">The one-hour narrative</h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-text-2">A 28-scene overview connecting LLM foundations, reusable skills, agentic loops, specialist delivery, ArchStudio, security controls, and future-state governance.</p>
-            <a href={`${base}/summary/`} className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-2">Open executive summary <ArrowRight size={15} /></a>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-text-3">Original detailed summary</p>
+            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-text">The complete 28-scene narrative</h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-text-2">The preserved original with deeper capability flows, ArchStudio, specialist delivery, security controls, value, adoption, and future-state governance.</p>
+            <a href={`${base}/summary/`} className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-2">Open original summary <ArrowRight size={15} /></a>
           </div>
         </section>
 

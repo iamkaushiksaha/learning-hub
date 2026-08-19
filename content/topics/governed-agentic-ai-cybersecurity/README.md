@@ -24,3 +24,10 @@ The interactive presentation is consolidated under
 `public/presentations/governed-agentic-ai/` in this repository. The hub topic is
 its discovery and context page; `content/topic-map.md` connects every teaching
 segment to deeper technical-learning pages.
+
+The recommended one-hour route is the 14-page simplified session under
+`public/presentations/governed-agentic-ai/simplified/`. Its format-neutral
+content, diagram, animation, speaker-note, reference and PowerPoint production
+specification is maintained in
+`content/presentations/governed-agentic-ai-simplified-spec.md`. The original
+28-page summary remains available as the detailed technical route.
