@@ -396,3 +396,33 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Landing hero: animate in CSS, not JS ----
+   The hero is the first impression and must be readable before hydration,
+   so it is server-rendered visible and eased in by a keyframe with
+   `fill-mode: both`. Sections below the fold keep their JS scroll triggers. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise-in 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-1 { animation-delay: 0.06s; }
+.rise-2 { animation-delay: 0.12s; }
+.rise-3 { animation-delay: 0.18s; }
+.rise-4 { animation-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
