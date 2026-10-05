@@ -15,7 +15,14 @@ export const metadata: Metadata = {
     title: "Kaushik Saha — Cloud Security Architect",
     description:
       "Microsoft Sentinel, Defender XDR and SOAR, plus governed agentic AI for security operations.",
-    images: ["/og/home"],
+    images: [`${APEX_URL}/og/profile`],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kaushik Saha — Cloud Security Architect",
+    description:
+      "Microsoft Sentinel, Defender XDR and SOAR, plus governed agentic AI for security operations.",
+    images: [`${APEX_URL}/og/profile`],
   },
 };
 
